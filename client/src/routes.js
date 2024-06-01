@@ -1,12 +1,11 @@
-import { Component } from "react"
-import Admin from "./pages/Admin"
 import { ADMIN_ROUTE, BASKET_ROUTE, BLOG_ROUTE, CERTIFICATE_ROUTE, LOGIN_ROUTE, PRODUCT_ROUTE, REGISTRATION_ROUTE, SHOP_ROUTE } from "./utils/consts"
-import Shop from "./pages/shop"
+import Admin from "./pages/Admin"
+import Shop from "./pages/Shop"
 import Certificate from "./pages/Certificate"
 import Blog from "./pages/Blog"
 import Basket from "./pages/Basket"
 import ProductPage from "./pages/ProductPage"
-import Auth from "./pages/auth"
+import Auth from "./pages/Auth"
 
 export const authRoutes = [
 {
@@ -32,7 +31,7 @@ export const publicRoutes = [
         Component: Basket
     },
     {
-        path: PRODUCT_ROUTE+"/id",
+        path: PRODUCT_ROUTE+"/:id",
         Component: ProductPage
     },
     {
