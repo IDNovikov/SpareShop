@@ -5,7 +5,7 @@ const Admin = sequelize.define('admin', { //заменить на множест
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     email: {type: DataTypes.STRING, unique: true},//email\log
     password:{type: DataTypes.STRING},
-    role:{type: DataTypes.STRING, defaultValue:"ADMIN"},// def:user
+    role:{type: DataTypes.STRING, defaultValue:"USER"},// def:user
 })
 
 const Basket = sequelize.define('basket', {

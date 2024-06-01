@@ -1,10 +1,11 @@
 const Router = require('express')
 const router = new Router 
 const CertificateController = require('../controllers/certificateController')
+const checkRole = require('../middleWare/checkRoleMiddleware')
 
 router.post('/', CertificateController.postCertificate)
-router.get('/', CertificateController.getAllCertificate)
+router.get('/', checkRole("ADMIN"), CertificateController.getAllCertificate)
 router.get('/', CertificateController.checkCertificate)
-router.delete('/', CertificateController.deleteCertificate)
+router.delete('/', checkRole("ADMIN"), CertificateController.deleteCertificate)
 
 module.exports = router

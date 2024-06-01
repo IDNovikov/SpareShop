@@ -1,6 +1,8 @@
 const ApiError = require('../error/apiError')
 const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
 const {Admin, Basket} = require('../models/models')
+
 
 const generateJwt = (id, email, role) => {
     return jwt.sign(
@@ -11,7 +13,7 @@ const generateJwt = (id, email, role) => {
     )
 }
 class AdminController {
-    async registration (req, res){
+    async registration (req, res, next){
         const {email, password, role} = req.body
         if (!email || !password) {
             return next(ApiError.badRequest("Wrong password or email"))
@@ -22,22 +24,33 @@ class AdminController {
         }
         const hashPassword = await bcrypt.hash(password, 5)
         const admin = await Admin.create({email, role, password: hashPassword})
-        const token = generateJwt(user.id, user.email, user.role)
-        return res.jsin({token})
+       
+        const token = generateJwt(admin.id, admin.email, admin.role)
+        return res.json({token})
+
 
     } 
-        async login(req, res){
-            res.json("something posted")
-        
-    }
-        async check (req, res, next){
-            const {id} = req.query
-            if(!id) {
-               return next(ApiError.badRequest('Id not find'))
+        async login(req, res, next){
+            const {email, password} = req.body
+            const admin = await Admin.findOne({where: {email}})
+            if (!admin) {
+                return next(ApiError.internal ("Email is not correct"))
+                }
+                let comparePassword = bcrypt.compareSync(password, admin.password)
+            if (!comparePassword) {
+                return next(ApiError.internal("Password is not correct"))}
+                const token = generateJwt(admin.id, admin.email, admin.role)
+                return res.json({token})
             }
-          res.json(id)
+
+        
+    
+        async check (req, res, next){
+            const token = generateJwt(req.admin.id, req.admin.email, req.admin.role)
+            return res.json({token})
     }
 }
+
 
 module.exports = new AdminController();
 

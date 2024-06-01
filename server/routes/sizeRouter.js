@@ -1,10 +1,11 @@
 const Router = require('express')
 const router = new Router 
 const sizeController = require('../controllers/sizeController')
+const checkRole = require('../middleWare/checkRoleMiddleware')
 
-router.post('/', sizeController.create)
+router.post('/', checkRole("ADMIN"), sizeController.create)
 router.get('/', sizeController.getAll)
-router.delete('/', sizeController.delete)
+router.delete('/', checkRole("ADMIN"), sizeController.delete)
 
 
 module.exports = router

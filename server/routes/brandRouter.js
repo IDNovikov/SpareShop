@@ -1,10 +1,11 @@
 const Router = require('express')
 const router = new Router 
 const brandController = require("../controllers/brandController")
+const checkRole = require('../middleWare/checkRoleMiddleware')
 
-router.post('/', brandController.create)
+router.post('/', checkRole("ADMIN"), brandController.create)
 router.get('/', brandController.getAll)
-router.delete('/',brandController.delete)
+router.delete('/',checkRole("ADMIN"), brandController.delete)
 
 
 module.exports = router
