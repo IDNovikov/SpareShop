@@ -1,17 +1,23 @@
 import React from "react"
-import { Button, Container } from "react-bootstrap";
+import { Container } from "react-bootstrap";
+import CreateBrand from "../components/modals/createBrand";
+import CreateType from "../components/modals/createType";
+import CreateSize from "../components/modals/createSize";
+import CreateColor from "../components/modals/createColor";
+import CreatePost from "../components/modals/createPost";
+import CreateProduct from "../components/modals/createProduct";
 
 
 const Admin = () => {
   return (
     <Container className="d-flex flex-column">
-      <Button variant={"outline-dark"} className="mt-2"> Add type</Button>
-      <Button variant={"outline-dark"} className="mt-2"> Add brand</Button>
-      <Button variant={"outline-dark"} className="mt-2"> Add size</Button>
-      <Button variant={"outline-dark"} className="mt-2"> Add color</Button>
-      <Button variant={"outline-dark"} className="mt-2"> Add product</Button>
-      <Button variant={"outline-dark"} className="mt-2"> Add post</Button>
-    </Container>
+      <CreateType/>
+      <CreateBrand/>
+      <CreateSize/>
+      <CreateColor/>
+      <CreatePost/>
+      <CreateProduct/>
+    </Container >
   );
 }
 
