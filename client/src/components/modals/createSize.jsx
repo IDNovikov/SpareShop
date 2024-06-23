@@ -3,9 +3,17 @@ import { useState } from 'react';
 import { Form } from "react-bootstrap";
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import { createSize } from "../../http/productAPI";
 
 
 const CreateSize = () => {
+
+  const [value, setValue] = useState()
+const addSize = () => {
+  createSize({name: value}).then(data => setValue(""))
+  handleClose()
+}
+
     const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -24,7 +32,10 @@ const CreateSize = () => {
         <Modal.Body>
             
         <Form>
-            <Form.Control placeholder="Write new size"/>
+            <Form.Control 
+                        value={value}
+                        onChange={e=>setValue(e.target.value)}
+                        placeholder="Write new size"/>
         </Form>
             
             </Modal.Body>
@@ -32,7 +43,7 @@ const CreateSize = () => {
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={handleClose}>
+          <Button variant="primary" onClick={addSize}>
             Add
           </Button>
         </Modal.Footer>

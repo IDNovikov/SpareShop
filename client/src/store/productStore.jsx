@@ -4,40 +4,27 @@ export default class ProductStore{
 
     constructor (){
 
-        this._types = [
-            {id: 1, name: "Nosok1"},
-            {id: 2, name: "Nosok2"},
-            {id: 3, name: "Nosok3"},
-            {id: 4, name: "Nosok4"}
+        this._types = []
+
+        this._brands = [
 
         ]
-        this._brands = [
-            {id: 1, name: "IP"},
-            {id: 2, name: "Okey"}
-        ]
         this._colors = [
-            {id: 1, name: "green"},
-            {id: 2, name: "white"}
+
         ]
         this._sizes = [
-            {id: 1, name: "XL"},
-            {id: 2, name: "M"}
+
         ]
         
         this._products = [
-            {id: 1, name: "ClassicNosok1", price: 2500, img:"https://fb.ru/media/i/8/8/5/8/6/6/i/885866.jpg"},
-            {id: 2, name: "ClassicNosok2", price: 3500, img:"https://fb.ru/media/i/8/8/5/8/6/6/i/885866.jpg"},
-            {id: 3, name: "ClassicNosok3", price: 4500, img:"https://fb.ru/media/i/8/8/5/8/6/6/i/885866.jpg"},
-            {id: 4, name: "ClassicNosok4", price: 5500, img:"https://fb.ru/media/i/8/8/5/8/6/6/i/885866.jpg"},
+            // {id: 1, name: "ClassicNosok1", price: 2500, img:"https://fb.ru/media/i/8/8/5/8/6/6/i/885866.jpg"}
         ]
     //множественное выделение        
-        this._selectedTypes = {
-
-        }
+        this._selectedTypes = {}
+        
 
         this._selectedBrands = {
-
-        }
+ }
         
         this._selectedColors = {
 
@@ -46,6 +33,11 @@ export default class ProductStore{
         this._selectedSizes = {
 
         }
+
+        this._page = 1
+        this._totalCount = 9
+        this._limit = 3
+        
 
         makeAutoObservable(this)
     }
@@ -67,16 +59,28 @@ export default class ProductStore{
     }
     //множественное выделение
     setSelectedTypes(type){
+        this.setPage(1)
         this._selectedTypes = type
     }
         setSelectedBrands(brand){
+            this.setPage(1)
         this._selectedBrands = brand
     }
         setSelectedSizes(size){
+            this.setPage(1)
         this._selectedSizes = size
     }
             setSelectedColors(color){
+                this.setPage(1)
         this._selectedColors = color
+    }
+
+    setPage(page) {
+        this._page = page
+    }
+
+    setTotalCount(count) {
+        this._totalCount=count
     }
 
     get types (){
@@ -107,5 +111,17 @@ export default class ProductStore{
     }
             get selectedColors (){
         return this._selectedColors
+    }
+
+    get totalCount () {
+        return this._totalCount
+    }
+
+    get page () {
+        return this._page
+    }
+
+    get limit (){
+        return this._limit
     }
 }

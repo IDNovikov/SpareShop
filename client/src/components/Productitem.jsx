@@ -13,7 +13,7 @@ return(
 
         <Card className="d-flex mt-4" style={{width: 150, cursor:"pointer"}} border={"medium"}>
             <Image style={{position:"absolute", left:"75%"}} width={40} height={40} src={Heart}/>
-            <Image width={150} height={150} src={product.img}/>
+            <Image width={150} height={150} src={process.env.REACT_APP_API_URL+product.img}/>
                 <div>
                     <div>{product.name}</div>
                     <div>{product.price}$</div>

@@ -5,27 +5,35 @@ import Navbar from 'react-bootstrap/NavBar';
 import {Context} from "../index"
 import { ADMIN_ROUTE, LOGIN_ROUTE, REGISTRATION_ROUTE, SHOP_ROUTE } from "../utils/consts";
 import {Button} from "react-bootstrap"
-import { useNavigate } from "react-router-dom"
+import {useNavigate } from "react-router-dom"
 
 const NavBar = () => {
     const {user} = useContext(Context)
-    const navigate = useNavigate()
+    const navigate = useNavigate() 
+
+    const logOut = () => {
+      user.setUser({})
+      user.setIsAuth(false)
+      localStorage.removeItem('token')
+      //MUST CLEAR LOCALSTORAGE
+      navigate(LOGIN_ROUTE)
+    }
 
     return (
-             <Navbar bg="dark" data-bs-theme="dark">
+        <Navbar bg="dark" data-bs-theme="dark">
         <Container>
           <Nav.Link style={{color:"white"}}href={SHOP_ROUTE}>MAGAZINE</Nav.Link>
           <Nav className="ml-auto">
-            <Nav.Link href="#certificate">Gift certificate</Nav.Link>
-            <Nav.Link href="#blog">Blog</Nav.Link>
+            <Nav.Link href="certificate">Gift certificate</Nav.Link>
+            <Nav.Link href="blog">Blog</Nav.Link>
 
             {user.isAuth ? 
             <Nav className="ml-auto" style={{color:"white"}}>
             <Button onClick={()=> navigate(ADMIN_ROUTE)}>Admin panel</Button>
-            <Button onClick={()=> navigate(LOGIN_ROUTE)}>Logout</Button>
+            <Button onClick={()=> logOut()}>Logout</Button>
             </Nav>
             :
-            <Button href={REGISTRATION_ROUTE} onClick={() => user.setIsAuth(true)}>Autorization</Button>
+            <Button onClick={() =>navigate(LOGIN_ROUTE)}>Autorization</Button>
             }
            
           </Nav>

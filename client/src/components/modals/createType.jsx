@@ -3,9 +3,17 @@ import { useState } from 'react';
 import { Form } from "react-bootstrap";
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import { createType } from "../../http/productAPI";
 
 
 const CreateType = () => {
+const [value, setValue] = useState()
+const addType = () => {
+  createType({name: value}).then(data => setValue(""))
+  handleClose()
+}
+
+
     const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -24,7 +32,10 @@ const CreateType = () => {
         <Modal.Body>
             
         <Form>
-            <Form.Control placeholder="Write new type"/>
+            <Form.Control 
+            value={value}
+            onChange={e=>setValue(e.target.value)}
+            placeholder="Write new type"/>
         </Form>
             
             </Modal.Body>
@@ -32,7 +43,7 @@ const CreateType = () => {
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={handleClose}>
+          <Button variant="primary" onClick={addType}>
             Add
           </Button>
         </Modal.Footer>

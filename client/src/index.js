@@ -1,16 +1,14 @@
 import React, { createContext } from 'react';
-import ReactDOM from 'react-dom';
+import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import UserStore from './store/useStore';
+import UserStore from './store/userStore';
 import ProductStore from './store/productStore';
 import "bootstrap/dist/css/bootstrap.css"
-
+import { Navbar } from 'react-bootstrap';
 
  export const Context = createContext(null)
-
-console.log(process.env.REACT_APP_API_URL);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -18,6 +16,7 @@ root.render(
     user: new UserStore(),
     product: new ProductStore()
 }}>
+<Navbar/>
 <App />
 </Context.Provider>
     

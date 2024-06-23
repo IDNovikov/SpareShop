@@ -6,6 +6,13 @@ import Modal from 'react-bootstrap/Modal';
 
 
 const CreatePost = () => {
+  
+  const [value, setValue] = useState()
+const addPost = () => {
+  // createPost({name: value}).then(data => setValue(""))
+  handleClose()
+}
+
     const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -24,7 +31,10 @@ const CreatePost = () => {
         <Modal.Body>
             
         <Form>
-            <Form.Control placeholder="Write new post"/>
+            <Form.Control 
+                                    value={value}
+                                    onChange={e=>setValue(e.target.value)}
+            placeholder="Write new post"/>
         </Form>
             
             </Modal.Body>
@@ -32,7 +42,7 @@ const CreatePost = () => {
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={handleClose}>
+          <Button variant="primary" onClick={addPost}>
             Add
           </Button>
         </Modal.Footer>

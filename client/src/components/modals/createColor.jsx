@@ -3,9 +3,15 @@ import { useState } from 'react';
 import { Form } from "react-bootstrap";
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import { createColor } from "../../http/productAPI";
 
 
 const CreateColor = () => {
+  const [value, setValue] = useState()
+  const addColor = () => {
+    createColor({name: value}).then(data => setValue(""))
+    handleClose()
+  }
     const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -24,7 +30,10 @@ const CreateColor = () => {
         <Modal.Body>
             
         <Form>
-            <Form.Control placeholder="Write new color"/>
+            <Form.Control 
+                                    value={value}
+                                    onChange={e=>setValue(e.target.value)}
+            placeholder="Write new color"/>
         </Form>
             
             </Modal.Body>
@@ -32,7 +41,7 @@ const CreateColor = () => {
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={handleClose}>
+          <Button variant="primary" onClick={addColor}>
             Add
           </Button>
         </Modal.Footer>

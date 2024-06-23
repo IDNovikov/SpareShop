@@ -1,28 +1,38 @@
-import React, { useState } from "react"
+import React, { useContext, useState } from "react"
 import {Container, Form} from "react-bootstrap"
 import Card from "react-bootstrap/Card"
 import Button from "react-bootstrap/Button"
 import Row from "react-bootstrap/Row"
-import {NavLink, useLocation} from "react-router-dom"
-import { LOGIN_ROUTE, REGISTRATION_ROUTE } from "../utils/consts"
+import {NavLink, useLocation, useNavigate} from "react-router-dom"
+import { ADMIN_ROUTE, LOGIN_ROUTE, REGISTRATION_ROUTE } from "../utils/consts"
 import { login, registration } from "../http/userAPI"
+import { observer } from "mobx-react-lite"
+import { Context } from ".."
 
 
-const Auth = () => {
+const Auth = observer( () => {
+  const {user} = useContext(Context)
   const location = useLocation()
+  const navigate = useNavigate()
   const isLogin = location.pathname === LOGIN_ROUTE
 
   const [email, setEmail] = useState()
   const [password, setPassword] = useState()
 
   const uniAuth = async () => {
+    try{
+    let data
     if (isLogin){
-      const response = await login()
+      data = await login(email, password)
     } else {
-      const response = await registration(email, password) 
-      console.log(response)
+      data = await registration(email, password) 
     }
-  }
+    user.setUser(user)
+    user.setIsAuth(true)
+    navigate(ADMIN_ROUTE)
+  }catch (err) {
+alert(err.response.data.message)
+  }}
   
    
   return (
@@ -69,5 +79,6 @@ const Auth = () => {
     </Container>
   );
 }
+)
 
 export default Auth;

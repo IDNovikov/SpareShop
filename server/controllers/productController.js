@@ -25,13 +25,14 @@ class ProductController {
             data.push(name)
         }
         const dataString = JSON.stringify(data) 
+    
         const product = await Product.create({name, price,brandId, typeId, sizeId, colorId, img:dataString})
 
         if (info){
             info=JSON.parse(info)
             info.forEach (i => {
                 ProductInfo.create({
-                    title: i.title,
+                    tittle: i.tittle,
                     discription: i.discription,
                     productId: product.id
                 })
@@ -44,9 +45,9 @@ class ProductController {
     }
         async getAll (req, res, next){ 
             try{
-            let {brandId, typeId, colorId, sizeId, limit, page} = req.query
+            let {brandId, typeId, colorId, sizeId, page, limit} = req.query
             page=page||1
-            limit = limit||20
+            limit = limit||9
             let offset = page*limit-limit
             let products
             //1
