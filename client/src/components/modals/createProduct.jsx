@@ -12,18 +12,19 @@ const CreateProduct= observer(() => {
 
     const [name, setName] = useState()
     const [price, setPrice] = useState()
-    const [file, setFile] = useState(null)
-    // const [files1, setFiles] = useState([])
+    const [file1, setFile1] = useState()
+    const [file2, setFile2] = useState()
+    const [file3, setFile3] = useState()
+    const [file4, setFile4] = useState()
+    const [file5, setFile5] = useState()
     const [info, setInfo] = useState([])
 
     const addInfo = () => {
       setInfo([...info, {tittle:" ", discription:" ", number: Date.now()}])
     }
-
     const removeInfo = (number) => {
         setInfo(info.filter(i=> i.number !== number))
     }
-
     const changeInfo = (key, value, number) => {
       setInfo(info.map(i=> i.number === number ? {...i, [key]:value}:i))
     }
@@ -36,16 +37,31 @@ const CreateProduct= observer(() => {
       formData.append('typeId', product.selectedTypes.id)
       formData.append('sizeId', product.selectedSizes.id)
       formData.append('colorId', product.selectedColors.id)
-      formData.append('img', file)
+      formData.append('img1', file1)
+      formData.append('img2', file2)
+      formData.append('img3', file3)
+      formData.append('img4', file4)
+      formData.append('img5', file5)
       formData.append('info', JSON.stringify(info))
-console.log(formData)
+      console.log(formData)
       createProduct(formData).then(data => handleClose)
     }
 
-  
-    const selectFiles = (e) => {
-      setFile(e.target.files[0])
-    }
+  const selectFile1 = e => {
+    setFile1(e.target.files[0])
+}
+  const selectFile2 = e => {
+    setFile2(e.target.files[0])
+}
+const selectFile3 = e => {
+  setFile3(e.target.files[0])
+}
+const selectFile4 = e => {
+  setFile4(e.target.files[0])
+}
+const selectFile5 = e => {
+  setFile5(e.target.files[0])
+}
 
     useEffect ( () => {
       fetchTypes().then(data=>product.setTypes(data))
@@ -113,15 +129,15 @@ console.log(formData)
             onChange={e=> setPrice(Number(e.target.value))}
              className="mt-2" placeholder="Write price of product" type="number"/>
             <Form.Label className="mt-2">Add image 1</Form.Label>
-            <Form.Control onChange={selectFiles} placeholder="Add image 1" type="file"/>
+            <Form.Control onChange={selectFile1} placeholder="Add image 1" type="file"/>
             <Form.Label className="mt-2">Add image 2</Form.Label>
-            <Form.Control  placeholder="Add image 2" type="file"/>
+            <Form.Control onChange={selectFile2} placeholder="Add image 2" type="file"/>
             <Form.Label className="mt-2">Add image 3</Form.Label>
-            <Form.Control  placeholder="Add image 3" type="file"/>
+            <Form.Control onChange={selectFile3} placeholder="Add image 3" type="file"/>
             <Form.Label className="mt-2">Add image 4</Form.Label>
-            <Form.Control  placeholder="Add image 4" type="file"/>
+            <Form.Control onChange={selectFile4} placeholder="Add image 4" type="file"/>
             <Form.Label className="mt-2">Add image 5</Form.Label>
-            <Form.Control  placeholder="Add image 5" type="file"/>
+            <Form.Control onChange={selectFile5} placeholder="Add image 5" type="file"/>
             <hr/>
             <Button
                         variant={"outline-dark"}

@@ -19,7 +19,7 @@ export const check = async () => {
         localStorage.getItem('token', data.token)
         return jwtDecode(data.token)
     } catch(err) {
-        console.log(err.message)
+        
     }
 
 }

@@ -41,8 +41,6 @@ const Shop = observer(() => {
     <Sizebar/>
     <Colorbar/>
   </Col>
-
-
   <Col md={9}> 
 <Selectedbar/>
 <Productlist/>

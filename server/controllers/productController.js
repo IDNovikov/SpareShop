@@ -9,12 +9,12 @@ class ProductController {
 
         async create (req, res, next){
             try {
-        const data = []
 
         let {name, price, brandId, typeId, sizeId, colorId, info} = req.body
 
         const images = req.files
-
+        const data = []
+        
         function fileName() {
             return uuid.v4()+'.jpg'}
 
@@ -24,8 +24,8 @@ class ProductController {
             img.mv(path.resolve(__dirname, '..',"static", name))
             data.push(name)
         }
-        const dataString = JSON.stringify(data) 
-    
+            let dataString = JSON.stringify(data)
+
         const product = await Product.create({name, price,brandId, typeId, sizeId, colorId, img:dataString})
 
         if (info){
@@ -43,6 +43,8 @@ class ProductController {
                 next(ApiError.badRequest(err.massage))
             }
     }
+
+
         async getAll (req, res, next){ 
             try{
             let {brandId, typeId, colorId, sizeId, page, limit} = req.query
@@ -114,7 +116,6 @@ class ProductController {
             if (!brandId && !typeId && !colorId && !sizeId){
                 products = await Product.findAndCountAll({limit, offset})
             }
-
            return res.json(products)
 
         }catch(err) {

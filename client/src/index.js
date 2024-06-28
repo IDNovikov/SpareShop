@@ -6,7 +6,8 @@ import reportWebVitals from './reportWebVitals';
 import UserStore from './store/userStore';
 import ProductStore from './store/productStore';
 import "bootstrap/dist/css/bootstrap.css"
-import { Navbar } from 'react-bootstrap';
+import BlogWall from './store/blogWall';
+
 
  export const Context = createContext(null)
 
@@ -14,9 +15,9 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
 <Context.Provider value = {{
     user: new UserStore(),
-    product: new ProductStore()
+    product: new ProductStore(),
+    blog: new BlogWall()
 }}>
-<Navbar/>
 <App />
 </Context.Provider>
     

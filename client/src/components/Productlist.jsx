@@ -10,7 +10,7 @@ const Productlist = observer(() => {
 return(
     <Row className="d-flex">
         {product.products.map(product =>
-            <Productitem key={product.id} product={product} />
+            <Productitem key={product.id} product={product}/>
             )
         }
     </Row>

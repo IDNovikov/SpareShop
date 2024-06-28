@@ -14,8 +14,8 @@ const NavBar = () => {
     const logOut = () => {
       user.setUser({})
       user.setIsAuth(false)
-      localStorage.removeItem('token')
-      //MUST CLEAR LOCALSTORAGE
+      localStorage.removeItem("token")
+
       navigate(LOGIN_ROUTE)
     }
 
@@ -33,7 +33,7 @@ const NavBar = () => {
             <Button onClick={()=> logOut()}>Logout</Button>
             </Nav>
             :
-            <Button onClick={() =>navigate(LOGIN_ROUTE)}>Autorization</Button>
+            <></>
             }
            
           </Nav>
