@@ -32,8 +32,8 @@ const addPost = () => {
             
         <Form>
             <Form.Control 
-                                    value={value}
-                                    onChange={e=>setValue(e.target.value)}
+             value={value}
+             onChange={e=>setValue(e.target.value)}
             placeholder="Write new post"/>
         </Form>
             

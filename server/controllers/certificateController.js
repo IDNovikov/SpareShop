@@ -2,13 +2,14 @@ const { Certificate } = require("../models/models")
 const ApiError = require('../error/apiError')
 const uuid = require('uuid') //изменить уникальность
 
+
 class CerctificateController {
 
   async postCertificate (req, res, next){
     try {
         let uniqId = uuid.v4() //so hard)))
-        let {price, phoneNumber, email} = req.body
-        const certificate = await Certificate.create({uniqId, price,phoneNumber, email})
+        let {recipient, emailFrom, amount, note, emailTo, phone} = req.body
+        const certificate = await Certificate.create({uniqId, recipient, emailFrom, amount, note, emailTo, phone})
         return res.json(certificate)
     } catch (err) {
         next(ApiError.badRequest(err.massage))
@@ -23,12 +24,21 @@ class CerctificateController {
           }
     }
     
-    async checkCertificate (req, res){//необходимо продумать функционал. Поидее при отправке корзины должна происходить верификация сертификата
-         const {id} = req.params
-            const certificate = await Certificate.findOne(
-                {where:{id}}
-            )
-            return res.json(certificate)
+    async checkCertificate (req, res){
+      try{
+        const {id, uniqId} = req.params
+        const certificate = await Certificate.findOne(
+               {where:{id}})
+
+               if (uniqId === certificate.uniqId)
+                { return res.json(certificate)}
+               else {
+                return res.json('This certificate is not exist')
+               }
+      } catch (err) {
+        next(ApiError.badRequest(err.massage))
+        }
+  
     }
 
       async deleteCertificate (req, res, next){

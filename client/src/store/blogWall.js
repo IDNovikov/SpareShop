@@ -1,6 +1,6 @@
 import {makeAutoObservable} from "mobx"
 
-export default class blogWall{
+export default class BlogWall{
 
     constructor (){
 
@@ -30,7 +30,7 @@ export default class blogWall{
     }
 
     
-        get Posts (){
+        get posts (){
         return this._posts
     }
 

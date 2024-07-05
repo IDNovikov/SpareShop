@@ -5,19 +5,19 @@ import { $authHost, $host } from "./index";
 //posts
 
 export const createPost = async (post) => {
-    const {data} = await $authHost.post("api/post", post )
+    const {data} = await $authHost.post("api/blog", post )
     return data
 }
 
-export const fetchPosts = async (page, limit = 5)  => {
-    const {data} = await $host.get("api/post", {params:{page, limit}})
+export const fetchPosts = async (page, limit = 10)  => {
+    const {data} = await $host.get("api/blog", {params:{page, limit}})
     return data
 }
 
 //oneProduct
 
 export const fetchOnePost = async (id)  => {
-    const {data} = await $host.get("api/post/"+id)
+    const {data} = await $host.get("api/blog/"+id)
     return data
 }
 

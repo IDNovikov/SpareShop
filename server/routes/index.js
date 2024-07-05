@@ -8,6 +8,7 @@ const sizeRouter = require('./sizeRouter')
 const typeRouter = require('./typeRouter')
 const adminRouter = require('./adminRouter')
 const certificateRouter = require('./certificateRouter')
+const postRouter = require('./postRouter')
 
 
 router.use('/type', typeRouter)
@@ -18,5 +19,6 @@ router.use('/color', colorRouter)
 router.use('/admin', adminRouter)
 router.use('/basket', basketRouter)
 router.use('/certificate', certificateRouter)
+router.use('/blog', postRouter)
 
 module.exports = router 

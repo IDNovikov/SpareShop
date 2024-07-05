@@ -7,6 +7,7 @@ import { Context } from ".";
 import { check } from "./http/userAPI";
 import { Spinner } from "react-bootstrap";
 
+//сюда добавить проверку начальной корзины
 
 const App = observer( ()=> {
   const {user} = useContext(Context)

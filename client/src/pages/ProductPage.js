@@ -1,13 +1,18 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useState, useContext } from "react"
 import { Col, Row, Container, Image, Card, Button, SplitButton } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import { fetchOneProduct } from "../http/productAPI";
-
+import { Context } from "..";
 
 const ProductPage = () => {
+  const {basket} = useContext(Context)
   const [product, setProduct] = useState({info:[]})
   const [images, setImages] = useState([])
   const {id} = useParams()
+
+  const add = () =>{
+    basket.addProduct(product)
+}
   
   useEffect(()=> {
     fetchOneProduct(id).then(data => {
@@ -34,7 +39,7 @@ const ProductPage = () => {
           <h2> {product.name}</h2>
           <Card>
           <h3> {product.price}</h3>
-          <Button> Add to card</Button>
+          <Button onClick={add}> Add to card</Button>
           </Card>
           <Row className="d-flex flex-column m-3">
             {product.info.map((inf =>

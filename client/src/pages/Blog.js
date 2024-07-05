@@ -6,23 +6,27 @@ import { fetchPosts  } from "../http/postsAPI";
 import Pages from "../components/Pages";
 import PostList from "../components/PostList";
 
-const BlogWall = observer(() => {
+const Blog = observer(() => {
 
-  const {posts} = useContext(Context)
+  const {blog} = useContext(Context)
 
-    // useEffect ( () => {
-    //     fetchPosts().then(data=>
-    //     {posts.setPosts(data.rows)
-    //      posts.setTotalCount(data.count)})
-    // }, [])
+    useEffect ( () => {
+        fetchPosts().then(data=>
+        {console.log(data)
+          blog.setPosts(data.rows)
+         blog.setTotalCount(data.count)})
+    }, [])
 
-    // useEffect(()=>{
-    //   fetchPosts(posts.page, 9).then(data=>
-    //     {post.setPosts(data.rows)
-    //      post.setTotalCount(data.count)
-    //     })
-    // }, [post.page])
+    useEffect(()=>{
+      fetchPosts(blog.page, 9).then(data=>
+        {
+          console.log(data)
+          blog.setPosts(data.rows)
+         blog.setTotalCount(data.count)
+        })
+    }, [blog.page])
 
+   
   return (
     <Container>
   <Row className="mt-3">
@@ -36,4 +40,4 @@ const BlogWall = observer(() => {
 }
 )
 
-export default BlogWall;
+export default Blog;

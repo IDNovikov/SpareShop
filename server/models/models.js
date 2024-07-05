@@ -22,9 +22,12 @@ const Basket = sequelize.define('basket', {
 const Certificate = sequelize.define('certificate', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     uniqId: {type: DataTypes.STRING, primaryKey: true},
-    price: {type: DataTypes.STRING, allowNull: false},
-    phoneNumber: {type: DataTypes.STRING, allowNull: false},
-    email: {type: DataTypes.STRING, allowNull: false},
+    recipient: {type: DataTypes.STRING, allowNull: false},
+    emailFrom: {type: DataTypes.STRING, allowNull: false},
+    amount: {type: DataTypes.STRING, allowNull: false},
+    note: {type: DataTypes.STRING, allowNull: true},
+    emailTo: {type: DataTypes.STRING, allowNull: false},
+    phone: {type: DataTypes.STRING, allowNull: false},
 })
 
 const BasketProduct = sequelize.define('basket_product', {
@@ -35,6 +38,13 @@ const Product = sequelize.define('product', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     name: {type: DataTypes.STRING, unique: true, allowNull: false},
     price: {type: DataTypes.STRING, allowNull: false},
+    img: {type: DataTypes.STRING, allowNull: false},
+})
+
+const Post = sequelize.define('post', {
+    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
+    tittle: {type: DataTypes.STRING, unique: false, allowNull: false},
+    discription: {type: DataTypes.STRING, allowNull: false},
     img: {type: DataTypes.STRING, allowNull: false},
 })
 
@@ -119,6 +129,7 @@ module.exports = {
     BasketProduct,
     Product,
     ProductInfo,
+    Post,
     Type,
     Brand,
     TypeBrand,

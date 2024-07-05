@@ -4,8 +4,9 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/NavBar';
 import {Context} from "../index"
 import { ADMIN_ROUTE, LOGIN_ROUTE, REGISTRATION_ROUTE, SHOP_ROUTE } from "../utils/consts";
-import {Button} from "react-bootstrap"
+import {Button, Image} from "react-bootstrap"
 import {useNavigate } from "react-router-dom"
+import BasketModal from "./modals/basketModal";
 
 const NavBar = () => {
     const {user} = useContext(Context)
@@ -37,6 +38,7 @@ const NavBar = () => {
             }
            
           </Nav>
+          <BasketModal/>
         </Container>
       </Navbar>
     )

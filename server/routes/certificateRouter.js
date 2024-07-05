@@ -6,6 +6,6 @@ const checkRole = require('../middleWare/checkRoleMiddleware')
 router.post('/', CertificateController.postCertificate)
 router.get('/', checkRole("ADMIN"), CertificateController.getAllCertificate)
 router.get('/', CertificateController.checkCertificate)
-router.delete('/', checkRole("ADMIN"), CertificateController.deleteCertificate)
+router.delete('/:id', checkRole("ADMIN"), CertificateController.deleteCertificate)
 
 module.exports = router
