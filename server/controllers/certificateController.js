@@ -24,21 +24,20 @@ class CerctificateController {
           }
     }
     
-    async checkCertificate (req, res){
+    async checkCertificate (req, res, next){
       try{
-        const {id, uniqId} = req.params
-        const certificate = await Certificate.findOne(
-               {where:{id}})
-
-               if (uniqId === certificate.uniqId)
-                { return res.json(certificate)}
-               else {
-                return res.json('This certificate is not exist')
-               }
+        const {uniqId} = req.body
+        try{
+          const certificate = await Certificate.findOne(
+            {where:{uniqId}})
+            if (uniqId === certificate.uniqId)
+              {return res.json(JSON.stringify(certificate))}
+        } catch{
+          return res.json("no accept")
+        }
       } catch (err) {
         next(ApiError.badRequest(err.massage))
         }
-  
     }
 
       async deleteCertificate (req, res, next){

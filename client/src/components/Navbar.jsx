@@ -5,12 +5,13 @@ import Navbar from 'react-bootstrap/NavBar';
 import {Context} from "../index"
 import { ADMIN_ROUTE, LOGIN_ROUTE, REGISTRATION_ROUTE, SHOP_ROUTE } from "../utils/consts";
 import {Button, Image} from "react-bootstrap"
-import {useNavigate } from "react-router-dom"
+import {Link, useLocation, useNavigate } from "react-router-dom"
 import BasketModal from "./modals/basketModal";
 
 const NavBar = () => {
     const {user} = useContext(Context)
     const navigate = useNavigate() 
+    const location = useLocation()
 
     const logOut = () => {
       user.setUser({})
@@ -26,7 +27,7 @@ const NavBar = () => {
           <Nav.Link style={{color:"white"}}href={SHOP_ROUTE}>MAGAZINE</Nav.Link>
           <Nav className="ml-auto">
             <Nav.Link href="certificate">Gift certificate</Nav.Link>
-            <Nav.Link href="blog">Blog</Nav.Link>
+            <Nav.Link href="post">Blog</Nav.Link>
 
             {user.isAuth ? 
             <Nav className="ml-auto" style={{color:"white"}}>
@@ -39,7 +40,7 @@ const NavBar = () => {
            
           </Nav>
           <BasketModal/>
-        </Container>
+          </Container>
       </Navbar>
     )
 }

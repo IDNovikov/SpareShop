@@ -11,6 +11,7 @@ import { Spinner } from "react-bootstrap";
 
 const App = observer( ()=> {
   const {user} = useContext(Context)
+  const {basket} = useContext(Context)
  const [loading, setLoading] = useState (true)
 
  useEffect(() => {
@@ -23,6 +24,13 @@ const App = observer( ()=> {
     }).finally(() => setLoading(false))
 }, [])
 
+  useEffect(() =>{
+    if(localStorage.getItem('basket')){
+      let data = JSON.parse(localStorage.getItem('basket'))
+      basket.setBasket(data)
+    }
+
+  })
   if (loading) {
     return <Spinner animation={"grow"}/>
   }

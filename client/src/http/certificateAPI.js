@@ -9,14 +9,19 @@ export const createCertificate = async (certi) => {
     return data
 }
 
+export const checkCertificate = async (uniqId) => {
+    const {data} = await $host.post("api/certificate/check", uniqId )
+    return data
+}
+
 export const fetchCertificates = async (page, limit = 5)  => {
-    const {data} = await $authHost.get("api/certificates", {params:{page, limit}})
+    const {data} = await $authHost.get("api/certificate/", {params:{page, limit}})
     return data
 }
 
 
 export const deleteCertificate = async (id)  => {
-    const {data} = await $authHost.get("api/certificate/"+id)
+    const {data} = await $authHost.delete("api/certificate/"+id)
     return data
 }
 

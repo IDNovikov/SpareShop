@@ -30,7 +30,7 @@ export const publicRoutes = [
         Component: PostPage
     },
     {
-        path: BLOG_ROUTE,
+        path: POST_ROUTE,
         Component: Blog
     },
     {

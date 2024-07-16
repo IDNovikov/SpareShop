@@ -10,25 +10,31 @@ export default class BasketControl{
         makeAutoObservable(this)
     }
     
-    addProduct(product) {
-        this._basket.push(product)
-        localStorage.setItem('basket', JSON.stringify(this._basket))
-    }
-    
-    deleteProduct(id) {
-        for(let i = 0; i<=this._basket.length; i++) {
-            if(this._basket[i][id]==id){
-                return this._basket.splice(i, 1)
-            }
+
+        setBasket (basket){
+            this._basket=basket
         }
-        localStorage.removeItem('basket')
-        localStorage.setItem('basket', JSON.stringify(this._basket))
-    }
     
         get basket (){
-            if(localStorage.getItem('basket')){
-                return  localStorage.getItem('basket')
-            }
         return this._basket
-    }
+        }
+    
+        addProduct(product) {
+                this._basket.push(product)
+                localStorage.removeItem('basket')
+                localStorage.setItem('basket', JSON.stringify(this._basket))
+    
+        }
+        
+        deleteProduct(id) {
+    
+            this._basket.forEach((product,ind)=>{
+                if(product.id==id){
+                    this._basket.splice(ind, 1)
+                } 
+            })
+            localStorage.removeItem('basket')
+            localStorage.setItem('basket', JSON.stringify(this._basket))
+            
+        }
 }
