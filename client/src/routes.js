@@ -1,13 +1,14 @@
 
-import { ADMIN_ROUTE, BASKET_ROUTE, BLOG_ROUTE, CERTIFICATE_ROUTE, LOGIN_ROUTE, PRODUCT_ROUTE, REGISTRATION_ROUTE, SHOP_ROUTE, POST_ROUTE } from "./utils/consts"
+import { ADMIN_ROUTE, BASKET_ROUTE, BLOG_ROUTE, CERTIFICATE_ROUTE, LOGIN_ROUTE, PRODUCT_ROUTE, REGISTRATION_ROUTE, SHOP_ROUTE, POST_ROUTE, ORDER_ROUTE } from "./utils/consts"
 import Admin from "./pages/Admin"
 import Shop from "./pages/Shop"
 import Certificate from "./pages/Certificate"
 import Blog from "./pages/Blog"
-import Basket from "./pages/Basket"
+import Basket from "./components/modals/basketModal"
 import ProductPage from "./pages/ProductPage"
 import Auth from "./pages/Auth"
 import PostPage from "./pages/PostPage"
+import Order from "./components/modals/orderModal"
 
 export const authRoutes = [
 {
@@ -36,6 +37,10 @@ export const publicRoutes = [
     {
         path: BASKET_ROUTE,
         Component: Basket
+    },
+    {
+        path: ORDER_ROUTE,
+        Component: Order
     },
     {
         path: PRODUCT_ROUTE+"/:id",

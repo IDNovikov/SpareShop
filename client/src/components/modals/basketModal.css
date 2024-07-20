@@ -1,0 +1,17 @@
+.modalDiv {
+    top: 66px;
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    background-color: rgba(91, 112, 131, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+  }
+  .modalCraft {
+
+    background-color: white;
+    border-radius: 5px;
+  } 
