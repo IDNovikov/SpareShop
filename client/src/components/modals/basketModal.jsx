@@ -10,6 +10,7 @@ import {SHOP_ROUTE } from "../../utils/consts"
 import { checkCertificate } from "../../http/certificateAPI";
 import "./basketModal.css"
 import {Link, Outlet, useLocation, useNavigate } from "react-router-dom"
+import OrderModal from "./orderModal";
 
 const BasketModal = observer(() => {
   const navigate = useNavigate()
@@ -18,18 +19,20 @@ const BasketModal = observer(() => {
   const {basket} = useContext(Context)
 
   const [value, setValue] = useState()
-  const [order, setOrder] = useState()
-
-  const checkCerti = () => {
+  const [certi, setCerti] = useState()
+  const [modal, setModal] = useState(false)
+ 
+  const  checkCerti = () => {
     if (value){
       checkCertificate({uniqId:value}).then(data => {
-        setOrder(data)
-        console.log(order)
+        setCerti(data)
+        console.log(certi)
       })
     }else{
-      setOrder('no')
-      console.log(order)
+      setCerti('no')
+      console.log(certi)
     }
+    setModal(true)
   }
 
 const addToBasket = (product) =>{
@@ -71,18 +74,20 @@ cost(basket)
   </div>
   <div>
     <h3> Gift certificate</h3>
-    <Form>
+    <Form> 
           <Form.Control 
             value={value}
             onChange={e=>setValue(e.target.value)}
           placeholder="Code"/>
       </Form>
   </div>
-  <Link to="/basket/order" state={{ background: location } }><Button variant="primary" onClick={checkCerti}>
-    Checkout
-  </Button></Link>
-          <Outlet />
 
+  <Button variant="primary" onClick={checkCerti} >
+    Checkout
+  </Button>
+  {modal &&
+    <OrderModal basket={basket} certi={certi} setModal={setModal}/>
+  }
   </>
 }
         <button onClick={() => navigate(-1)}>Close</button>

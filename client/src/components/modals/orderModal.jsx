@@ -2,27 +2,58 @@ import React from "react";
 import { useState, useContext } from 'react';
 import { Form, Row} from "react-bootstrap";
 import Button from 'react-bootstrap/Button';
-import { Context } from "../..";
-import BasketItem from "./basketItem";
 import { observer } from "mobx-react-lite"
-import Nav from 'react-bootstrap/Nav';
-import {SHOP_ROUTE } from "../../utils/consts"
-import { checkCertificate } from "../../http/certificateAPI";
-import { useNavigate, useLocation } from "react-router-dom";
 import "./basketModal.css"
+import { postBasket } from "../../http/basketAPI";
 
 const OrderModal = observer((props) => {
-  const {basket} = useContext(Context)
-  const navigate = useNavigate()
-  const location = useLocation()
+  console.log(props)
+  const [productsID, setProductsID] = useState()
+  const [certiID, setCertiID] = useState("no")
+  const [totalCost, setTotalCost] = useState("")
+  const [delivery, setsetDelivery] = useState("")
+  const [phone, setPhone] = useState("")
+  const [email, setEmail] = useState("")
+  const [payment, setPayment] = useState("")
+  const [name, setName] = useState("")
+  const [adress, setAdress] = useState("")
 
-  
+  const addProduct = () => {
+    const formData = new FormData()
+    formData.append('productsId', productsID)
+    formData.append('certificateUniqId', certiID)
+    formData.append('totalCost', totalCost)
+    formData.append('typeOfDelivery', delivery)
+    formData.append('phoneNumber', phone)
+    formData.append('email', email)
+    formData.append('payment', payment)
+    formData.append('name', name)
+    formData.append('adress', adress)
+    console.log(formData)
+    postBasket(formData).then(data => alert("Happy"))
+  }
+
+  function addData (props) {
+    let preBasketId = new Array
+    props.basket.basket.map(product => preBasketId.push(String(product.id)))
+
+    console.log(JSON.stringify(preBasketId))
+  }
+  addData(props)
+
+
   return (
     <div className="modalDiv">
     <div className="modalCraft" style={{display:"flex", flexDirection:"column"}}>
-    <Button variant="primary" onClick={()=>navigate(-1)}>
-    Go back
-  </Button>
+    <Button variant="primary" onClick={()=>props.setModal(false)}>Go back</Button>
+    
+    
+    {/* <Form.Control 
+            value={name}
+            onChange={e=> setName(e.target.value)}
+             className="mt-2" placeholder="Write name"/> */}
+
+
     <Form>
       {['radio'].map((type) => (
     <div key={`inline-${type}`} className="mb-3">
@@ -55,7 +86,7 @@ const OrderModal = observer((props) => {
            
           placeholder="2"/>
       </Form>
-    <h2> {basket.basket.length}</h2>
+    
     </div>
   </div>
   );

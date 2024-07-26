@@ -17,6 +17,8 @@ const Basket = sequelize.define('basket', {
     phoneNumber: {type: DataTypes.STRING, allowNull: false},
     email: {type: DataTypes.STRING, allowNull: false},
     payment: {type: DataTypes.STRING, allowNull: false},
+    name:{type: DataTypes.STRING, allowNull: false},
+    adress: {type: DataTypes.STRING, allowNull: false},
 })
 
 const Certificate = sequelize.define('certificate', {

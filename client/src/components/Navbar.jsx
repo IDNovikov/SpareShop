@@ -22,7 +22,7 @@ const NavBar = () => {
     }
 
     return (
-        <Navbar bg="dark" data-bs-theme="dark">
+        <Navbar bg="dark" data-bs-theme="dark"> 
         <Container>
           <Nav.Link style={{color:"white"}}href={SHOP_ROUTE}>MAGAZINE</Nav.Link>
           <Nav className="ml-auto">
