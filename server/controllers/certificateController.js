@@ -33,7 +33,7 @@ class CerctificateController {
             if (uniqId === certificate.uniqId)
               {return res.json(JSON.stringify(certificate))}
         } catch{
-          return res.json("no accept")
+          return res.json("0")
         }
       } catch (err) {
         next(ApiError.badRequest(err.massage))

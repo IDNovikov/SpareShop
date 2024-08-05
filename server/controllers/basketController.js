@@ -20,7 +20,7 @@ class BasketController {
             //     {   
             //         uniqID.push(oneCertificate.uniqId)
             //     }
-            //     return res.json(CertiDB)
+                return res.json("SomeThinkWrong")
             } 
             }catch (err){
                 next(ApiError.badRequest(err.massage))

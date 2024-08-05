@@ -19,20 +19,20 @@ const BasketModal = observer(() => {
   const {basket} = useContext(Context)
 
   const [value, setValue] = useState()
-  const [certi, setCerti] = useState()
+  const [certi, setCerti] = useState(0)
   const [modal, setModal] = useState(false)
- 
+
+  console.log(certi)
+
   const  checkCerti = () => {
     if (value){
       checkCertificate({uniqId:value}).then(data => {
-        setCerti(data)
-        console.log(certi)
+        setCerti(JSON.parse(data))
       })
     }else{
-      setCerti('no')
-      console.log(certi)
+      setValue("Wrong certificate`s ID")
     }
-    setModal(true)
+
   }
 
 const addToBasket = (product) =>{
@@ -44,10 +44,17 @@ const deleteFromBasket = (id) =>{
 }
 
 let sum = 0
-const cost = (basket) => {
-basket.basket.map(product => sum+=Number(product.price))
+const cost = (basket, certi) => {
+  if (!certi){
+    console.log(certi)
+    basket.basket.map(product => sum+=Number(product.price))
+  }else{
+    basket.basket.map(product => sum+=Number(product.price))
+    sum=sum-Number(certi.amount)
+  }
+
 }
-cost(basket)
+cost(basket, certi)
 
 
   return (
@@ -74,19 +81,21 @@ cost(basket)
   </div>
   <div>
     <h3> Gift certificate</h3>
+    {/* Нужно изменить кнопку. При вводе сертификата, она должна гореть красным если не правильно */}
     <Form> 
           <Form.Control 
             value={value}
             onChange={e=>setValue(e.target.value)}
+            onBlur={checkCerti}
           placeholder="Code"/>
       </Form>
   </div>
 
-  <Button variant="primary" onClick={checkCerti} >
+  <Button variant="primary" onClick={()=>setModal(true)} >
     Checkout
   </Button>
   {modal &&
-    <OrderModal basket={basket} certi={certi} setModal={setModal}/>
+    <OrderModal basket={basket} certi={certi} setModal={setModal} amount={sum}/>
   }
   </>
 }
