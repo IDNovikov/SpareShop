@@ -1,36 +1,66 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import { useState } from 'react';
-import { Form } from "react-bootstrap";
+import { Form, Dropdown } from "react-bootstrap";
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { createType } from "../../http/productAPI";
+import { observer } from "mobx-react-lite";
+import { fetchTypes, deleteType, fetchBrands, fetchColors, fetchSizes, fetchProducts, createProduct  } from "../../http/productAPI";
+import { Context } from "../..";
 
 
-const CreateType = () => {
-const [value, setValue] = useState()
-const addType = () => {
-  createType({name: value}).then(data => setValue(""))
-  handleClose()
-}
 
 
-    const [show, setShow] = useState(false);
+const CreateType = observer(() => {
 
+  const {product} = useContext(Context)
+
+  const [show, setShow] = useState(false)
+  const [value, setValue] = useState()
+  const [info, setInfo] = useState()
+  
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  useEffect ( () => {
+    fetchTypes().then(data=>product.setTypes(data))
+  }, [])
+
+  const del = () => {
+    deleteType(product.selectedTypes.id).then(data => {
+     console.log(data)
+    })
+    handleClose()
+  }
+  const addType = () => {
+    createType({name: value}).then(data => setValue(""))
+    handleClose()
+  }
 
   return (
     <>
       <Button variant="primary" className="mt-2" onClick={handleShow}>
-        Add type
+        Manage type
       </Button>
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Add new type</Modal.Title>
+          <Modal.Title>Delete and add types</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-            
+        <Dropdown className="mt-2">
+                <Dropdown.Toggle>{product.selectedTypes.name||"Choose type"}</Dropdown.Toggle>
+                <Dropdown.Menu>
+                    {product.types.map(type => 
+                        <Dropdown.Item onClick={() => product.setSelectedTypes(type)} key={type.id}>{type.name}</Dropdown.Item>
+                    )}
+                    </Dropdown.Menu>
+                    </Dropdown>    
+          <Button variant="primary" onClick={del}>
+           Delete
+          </Button>
+
+
         <Form>
             <Form.Control 
             value={value}
@@ -51,5 +81,6 @@ const addType = () => {
     </>
   );
 }
+)
 
 export default CreateType

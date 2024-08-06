@@ -5,11 +5,13 @@ import Button from 'react-bootstrap/Button';
 import { observer } from "mobx-react-lite"
 import "./basketModal.css"
 import { postBasket } from "../../http/basketAPI";
+import FinishModal from "./finishModal";
 
 const OrderModal = observer((props) => {
   console.log(props)
 
-
+  const [finishModal, setFinishMadal] = useState(false)
+  const [Data, setData] = useState("")
   const [delivery, setDelivery] = useState("")
   const [phone, setPhone] = useState("")
   const [email, setEmail] = useState("")
@@ -29,7 +31,9 @@ const OrderModal = observer((props) => {
     formData.append('name', name)
     formData.append('adress', adress)
     console.log(formData)
-    postBasket(formData).then(data => alert(data))
+    postBasket(formData).then(data => {setFinishMadal(true);
+    setData(data)
+    })
   }
 
   let productsID = new Array
@@ -38,14 +42,15 @@ const OrderModal = observer((props) => {
     productsID = JSON.stringify(productsID)
   }
   addData(props)
-  addProduct()
-
 
   return (
     <div className="modalDiv">
     <div className="modalCraft" style={{display:"flex", flexDirection:"column"}}>
-    <Button variant="primary" onClick={()=>props.setModal(false)}>Go back</Button>
-    
+
+    {finishModal ?
+      <FinishModal data={Data}/> :
+      <>
+        <Button variant="primary" onClick={()=>props.setModal(false)}>Go back</Button>
     <div><h2>Type of delivery</h2></div>
     <form style={{display:"flex", flexDirection:"column"}}>
       <div><input type="radio" value="pickup" id="pickup"
@@ -104,6 +109,8 @@ const OrderModal = observer((props) => {
       </div>
     </form> 
     <Button variant="primary" onClick={()=>addProduct()}>Get order</Button>
+      </>
+    }
     </div>
   </div>
   );

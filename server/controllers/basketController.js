@@ -6,22 +6,14 @@ class BasketController {
      //1. We are construct and posting the basket in SQL
         async postBasket (req, res, next){
             try{
-            const {productsId, totalCost, typeOfDelivery, phoneNumber, email, payment, certificateUniqId} = req.body
+
+            const {productsId, totalCost, typeOfDelivery, phoneNumber, email, payment, certificateUniqId, name, adress} = req.body
           
 
-            if (certificateUniqId==null){
-                const BasketCr = await Basket.create({productsId, totalCost, typeOfDelivery, phoneNumber, email, payment, certificateUniqId:''})
-                return res.json(BasketCr)
-            } else {
-        
-            // const CertiDB = await Certificate.findAll()      
-            // const uniqID =[]
-            //     for (let oneCertificate in CertiDB)
-            //     {   
-            //         uniqID.push(oneCertificate.uniqId)
-            //     }
-                return res.json("SomeThinkWrong")
-            } 
+            const BasketCreate = await Basket.create({productsId, totalCost, typeOfDelivery, phoneNumber, email, payment, certificateUniqId, name, adress})
+                return res.json(BasketCreate)
+
+             
             }catch (err){
                 next(ApiError.badRequest(err.massage))
           }

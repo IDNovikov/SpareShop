@@ -37,4 +37,9 @@ export default class BasketControl{
             localStorage.setItem('basket', JSON.stringify(this._basket))
             
         }
+
+        deleteBasket(){
+            this.setBasket([])
+            localStorage.removeItem('basket') 
+        }
 }

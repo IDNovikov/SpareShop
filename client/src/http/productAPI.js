@@ -12,10 +12,14 @@ export const fetchTypes = async ()  => {
     return data
 }
 
+export const deleteType = async (type) => {
+    const {data} = await $authHost.delete("api/type", type )
+    return data
+}
 //brands
 export const createBrand = async (brand) => {
     const {data} = await $authHost.post("api/brand", brand )
-    return data
+    return data 
 }
 
 export const fetchBrands = async ()  => {
