@@ -24,14 +24,13 @@ class ColorController {
     
         async delete (req, res, next){
             try{
-            const {name} = req.body
-            const color = await Color.destroy({where :
-                {name},
-            })
-            return res.json(color)
+            const {colorId} = req.body
+            const type = await Color.destroy({where :{id:colorId}})
+            return res.json(colorId)
              }catch (err){
              next(ApiError.badRequest(err.massage))
           }
+
     }
 }
 

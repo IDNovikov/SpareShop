@@ -18,6 +18,7 @@ class CerctificateController {
   async getAllCertificate (req, res, next){
           try {
             const certificates = await Certificate.findAll()
+            console.log(certificates)
             return res.json(certificates)
           }catch(err){
             next(ApiError.badRequest(err.massage))
@@ -42,10 +43,8 @@ class CerctificateController {
 
       async deleteCertificate (req, res, next){
         try {
-            const {id} = req.body
-            const certificate = await Certificate.destroy({where :
-                {id},
-            })
+            const {certiID} = req.body
+            const certificate = await Certificate.destroy({where :{id:certiID}})
             return res.json(certificate)
           }catch (err){
              next(ApiError.badRequest(err.massage))

@@ -25,11 +25,9 @@ class SizeController {
     
         async delete (req, res, next){
             try{
-            const {name} = req.body
-            const size = await Size.destroy({where :
-                {name},
-            })
-            return res.json(size)
+            const {sizeId} = req.body
+            const size = await Size.destroy({where :{id:sizeId}})
+            return res.json(sizeId)
              }catch (err){
              next(ApiError.badRequest(err.massage))
           }

@@ -3,9 +3,9 @@ import { useState } from 'react';
 import {Button, Dropdown, Form, Row, Col} from "react-bootstrap";
 import Modal from 'react-bootstrap/Modal';
 import { Context } from "../..";
-import { fetchTypes, fetchBrands, fetchColors, fetchSizes, fetchProducts, createProduct  } from "../../http/productAPI";
+import { fetchTypes, fetchBrands, fetchColors, fetchSizes, fetchProducts, createProduct, deleteProduct  } from "../../http/productAPI";
 import { observer } from "mobx-react-lite";
-
+import Productlist from "../Productlist";
 
 const CreateProduct= observer(() => {
     const {product} = useContext(Context)
@@ -43,10 +43,11 @@ const CreateProduct= observer(() => {
       formData.append('img4', file4)
       formData.append('img5', file5)
       formData.append('info', JSON.stringify(info))
-      console.log(formData)
       createProduct(formData).then(data => handleClose)
     }
-
+    const prodDelete = (id) => {
+      deleteProduct(id).then(data=>handleClose())
+    }
   const selectFile1 = e => {
     setFile1(e.target.files[0])
 }
@@ -79,15 +80,15 @@ const selectFile5 = e => {
   return (
     <>
       <Button variant="primary" className="mt-2" onClick={handleShow}>
-        Add product
+        Manage products
       </Button>
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Add new product</Modal.Title>
+          <Modal.Title>Delete and add new product</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-            
+            <Productlist prodDelete={prodDelete}/>
         <Form>
             <Dropdown className="mt-2">
                 <Dropdown.Toggle>{product.selectedTypes.name||"Choose type"}</Dropdown.Toggle>

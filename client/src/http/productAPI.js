@@ -1,6 +1,6 @@
 import { $authHost, $host } from "./index";
 import { jwtDecode } from "jwt-decode"
-//+deletes
+
 //types
 export const createType = async (type) => {
     const {data} = await $authHost.post("api/type", type )
@@ -13,7 +13,7 @@ export const fetchTypes = async ()  => {
 }
 
 export const deleteType = async (type) => {
-    const {data} = await $authHost.delete("api/type", type )
+    const {data} = await $authHost.delete("api/type", {data:{typeId:type}})
     return data
 }
 //brands
@@ -26,6 +26,11 @@ export const fetchBrands = async ()  => {
     const {data} = await $host.get("api/brand")
     return data
 }
+
+export const deleteBrand = async (brand) => {
+    const {data} = await $authHost.delete("api/brand", {data:{brandId:brand}})
+    return data
+}
 //colors
 export const createColor = async (color) => {
     const {data} = await $authHost.post("api/color", color )
@@ -34,6 +39,11 @@ export const createColor = async (color) => {
 
 export const fetchColors = async ()  => {
     const {data} = await $host.get("api/color")
+    return data
+}
+
+export const deleteColor = async (color) => {
+    const {data} = await $authHost.delete("api/color", {data:{colorId:color}})
     return data
 }
 //sizes
@@ -48,6 +58,10 @@ export const fetchSizes = async ()  => {
     return data
 }
 
+export const deleteSize = async (size) => {
+    const {data} = await $authHost.delete("api/size", {data:{sizeId:size}})
+    return data
+}
 //products
 
 export const createProduct = async (product) => {
@@ -68,3 +82,8 @@ export const fetchOneProduct = async (id)  => {
 }
 
 //deleteOneProduct
+
+export const deleteProduct = async (id) => {
+    const {data} = await $authHost.delete("api/product", {data:{productID:id}})
+    return data
+}

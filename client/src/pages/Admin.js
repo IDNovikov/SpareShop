@@ -6,7 +6,8 @@ import CreateSize from "../components/modals/createSize";
 import CreateColor from "../components/modals/createColor";
 import CreatePost from "../components/modals/createPost";
 import CreateProduct from "../components/modals/createProduct";
-
+import ManageCerti from "../components/modals/manageCerti";
+import ManageBasket from "../components/modals/manageBasket";
 
 const Admin = () => {
   return (
@@ -17,6 +18,8 @@ const Admin = () => {
       <CreateColor/>
       <CreatePost/>
       <CreateProduct/>
+      <ManageCerti/>
+      <ManageBasket/>
     </Container >
   );
 }

@@ -25,9 +25,9 @@ class TypeController {
     
         async delete (req, res, next){
             try{
-            const data = req.body
-            // const type = await Type.destroy({where :{name},})
-            return res.json("DataIs"+JSON.stringify(data))
+            const {typeId} = req.body
+            const type = await Type.destroy({where :{id:typeId}})
+            return res.json(typeId)
              }catch (err){
              next(ApiError.badRequest(err.massage))
           }

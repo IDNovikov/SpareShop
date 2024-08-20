@@ -3,12 +3,9 @@ import { useState } from 'react';
 import { Form, Dropdown } from "react-bootstrap";
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import { createType } from "../../http/productAPI";
+import { createType, fetchTypes, deleteType } from "../../http/productAPI";
 import { observer } from "mobx-react-lite";
-import { fetchTypes, deleteType, fetchBrands, fetchColors, fetchSizes, fetchProducts, createProduct  } from "../../http/productAPI";
 import { Context } from "../..";
-
-
 
 
 const CreateType = observer(() => {
@@ -17,7 +14,6 @@ const CreateType = observer(() => {
 
   const [show, setShow] = useState(false)
   const [value, setValue] = useState()
-  const [info, setInfo] = useState()
   
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -27,11 +23,12 @@ const CreateType = observer(() => {
   }, [])
 
   const del = () => {
-    deleteType(product.selectedTypes.id).then(data => {
-     console.log(data)
+    let outData = JSON.stringify(product.selectedTypes.id)
+    deleteType(outData).then(data => {
     })
     handleClose()
   }
+  
   const addType = () => {
     createType({name: value}).then(data => setValue(""))
     handleClose()

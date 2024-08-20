@@ -1,12 +1,12 @@
 
 import { ADMIN_ROUTE, BASKET_ROUTE, BLOG_ROUTE, CERTIFICATE_ROUTE, LOGIN_ROUTE, PRODUCT_ROUTE, REGISTRATION_ROUTE, SHOP_ROUTE, POST_ROUTE, ORDER_ROUTE } from "./utils/consts"
 import Admin from "./pages/Admin"
-import Shop from "./pages/Shop"
+import Shop from "./pages/shop"
 import Certificate from "./pages/Certificate"
 import Blog from "./pages/Blog"
 import Basket from "./components/modals/basketModal"
 import ProductPage from "./pages/ProductPage"
-import Auth from "./pages/Auth"
+import Auth from "./pages/auth"
 import PostPage from "./pages/PostPage"
 import Order from "./components/modals/orderModal"
 

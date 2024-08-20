@@ -22,3 +22,8 @@ export const fetchOnePost = async (id)  => {
 }
 
 //deletePost
+
+export const deletePost = async (id) => {
+    const {data} = await $authHost.delete("api/blog", {data:{postID:id}} )
+    return data
+}

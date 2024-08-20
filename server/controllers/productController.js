@@ -132,19 +132,27 @@ class ProductController {
             return res.json(product)
         }
         
-         async delete (req, res, next){ try {
-            //необходимо удаление статик файлов и продукта
-            const {id} = req.params
+         async delete (req, res, next){ 
+        try {
+            const {productID} = req.body
             const product = await Product.findOne(
-                {where:{id}, 
-                include:[{model:ProductInfo, as: 'info'}]
-                }
+                {where:{id:productID}}
             )
-            // let img = JSON.parse(product['img'])
-            let filePath = '../static'
-            let fileName = 'd1e35f5b-2170-4094-a3f8-6c9ebb3070d9.jpg'
-            fs.unlinkSync(filePath+fileName)
-            return res.json(product)
+            let images = JSON.parse(product.img)
+            for (let item of images){
+                await deletingImages(item)
+            }
+            async function deletingImages (item){
+            const filePath = path.join(__dirname, '..',"static", item);
+            fs.unlink(filePath, (err) => {
+                if(err) {
+                    return res.status(500).send('Error files is note deleted')
+                }
+            })
+            const PROD  = await Product.destroy({where :{id:productID}})
+            const PROD_INFO = await ProductInfo.destroy({where:{productId:productID}})
+                return res.json("Files succesfully deleted")
+            }
          } catch(err) {
             next(ApiError.badRequest(err.massage))
          }

@@ -56,18 +56,26 @@ class PostController {
             return res.json(post)
         }
         
-         async delete (req, res, next){ try {
-            //необходимо удаление статик файлов и продукта
-            const {id} = req.params
+         async delete (req, res, next){ 
+        try {
+            const {postID} = req.body
             const post = await Post.findOne(
-                {where:{id}}
+                {where:{id:postID}}
             )
-
-            // let img = JSON.parse(product['img'])
-            let filePath = '../static'
-            let fileName = 'd1e35f5b-2170-4094-a3f8-6c9ebb3070d9.jpg'
-            fs.unlinkSync(filePath+fileName)
-            return res.json(post)
+            let images = JSON.parse(post.img)
+            for (let item of images){
+                await deletingImages(item)
+            }
+            async function deletingImages (item){
+            const filePath = path.join(__dirname, '..',"static", item);
+            fs.unlink(filePath, (err) => {
+                if(err) {
+                    return res.status(500).send('Error files is note deleted')
+                }
+            })
+            const POST = await Post.destroy({where :{id:postID}})
+                return res.json("Files succesfully deleted")
+            }
          } catch(err) {
             next(ApiError.badRequest(err.massage))
          }

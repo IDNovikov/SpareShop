@@ -21,7 +21,7 @@ export const fetchCertificates = async (page, limit = 5)  => {
 
 
 export const deleteCertificate = async (id)  => {
-    const {data} = await $authHost.delete("api/certificate/"+id)
+    const {data} = await $authHost.delete("api/certificate/", {data:{certiID:id}})
     return data
 }
 

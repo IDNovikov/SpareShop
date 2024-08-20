@@ -12,7 +12,9 @@ const Selectedbar = observer(() => {
     return (
         <div>
   
-    {product.selectedBrands? <ListGroup>Multi Selected is not working!!!</ListGroup>
+    {product.selectedBrands? <ListGroup>
+        СЮДА можно вставить функционал
+        </ListGroup>
     :
     <ListGroup>
         {product.selectedBrands.map(brand => 

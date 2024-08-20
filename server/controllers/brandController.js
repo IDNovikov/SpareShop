@@ -24,12 +24,10 @@ class BrandController {
     }
     
         async delete (req, res, next){
-            try {
-            const {name} = req.body
-            const brand = await Brand.destroy({where :
-                {name},
-            })
-            return res.json(brand)
+            try{
+            const {brandId} = req.body
+            const brand = await Brand.destroy({where :{id:brandId}})
+            return res.json(brandId)
              }catch (err){
              next(ApiError.badRequest(err.massage))
           }

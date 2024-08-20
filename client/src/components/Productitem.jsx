@@ -6,7 +6,7 @@ import {useNavigate} from "react-router-dom"
 import { PRODUCT_ROUTE } from "../utils/consts"
 import { Context } from "..";
 
-const Productitem = ({product}) => {
+const Productitem = ({product, admin}) => {
     const {basket} = useContext(Context)
     const navigate = useNavigate()
   
@@ -33,7 +33,9 @@ return(
                     <div>{product.name}</div>
                     <div>{product.price}$</div>
                     
-                    <Button onClick={add}> Add to card</Button>
+                    {!admin ?
+          <Button onClick={add}> Add to card</Button>
+        : <></>}
                 </div>
         </Card>
 
