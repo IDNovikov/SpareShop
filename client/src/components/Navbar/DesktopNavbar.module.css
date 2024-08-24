@@ -1,0 +1,205 @@
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap");
+.main {
+  display: flex;
+  flex-direction: column;
+  width: 100wh;
+  height: 272px;
+  gap: 0px;
+  opacity: 0px;
+  background-color: black;
+}
+
+.wallpaper {
+  width: 100vw;
+  height: 50vw;
+  gap: 0px;
+  opacity: 0px;
+  background-position: center;
+  background-image: url(../../assets/image3.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.logo {
+  display: flex;
+  justify-content: center;
+}
+.firstLine {
+  display: grid;
+  grid-template-columns: 33% 33% 33%;
+  align-items: center;
+}
+
+.contacts {
+  padding-left: 10%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.menu {
+  display: flex;
+  margin-left: auto;
+  margin-right: 15%;
+}
+.menu button {
+  margin-right: 20%;
+}
+.menuNav {
+  height: 100%;
+}
+.menuNavActive {
+  height: 100%;
+}
+a {
+  text-decoration: none;
+  list-style-type: none;
+}
+.headerNavList {
+  height: 100%;
+  text-decoration: none;
+  list-style-type: none;
+  font-family: "IBM Plex Sans";
+  margin: 0px;
+  padding: 0px;
+  color: aliceblue;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+.Link {
+  text-decoration: none;
+  list-style-type: none;
+  color: aliceblue;
+}
+
+.MenuButton {
+  box-sizing: content-box;
+  display: none;
+  background-color: black;
+}
+
+.MenuButton img {
+  width: 48px;
+  height: 48px;
+}
+.BusketButton {
+  position: fixed;
+}
+@media (max-width: 750px) {
+  .firstLine {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .main {
+    height: 96px;
+  }
+  .header_inform {
+    display: none;
+  }
+  .menu {
+    position: relative;
+    margin-left: auto;
+    margin-right: 0%;
+  }
+  .menu button {
+    margin-right: 0%;
+  }
+  .BusketButton {
+    position: absolute;
+    top: 100px;
+  }
+  .menuNav {
+    position: fixed;
+    right: -225px;
+    display: flex;
+    flex-direction: column;
+    width: 220px;
+    height: 100%;
+    background-color: white;
+    transition: transform 0.3s linear;
+    z-index: 999;
+  }
+
+  .menuNavActive {
+    display: flex;
+    overflow: auto;
+    transform: translateX(-100%);
+  }
+
+  .headerNavList {
+    flex: 1;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    padding: 40px 15px;
+  }
+
+  .headerNavItem {
+    width: 100%;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #2d2d2d;
+    display: flex;
+    justify-content: space-between;
+    font-family: "IBM Plex Sans";
+    font-size: 17px;
+    font-weight: 400;
+    line-height: 16px;
+    text-align: left;
+    color: #2d2d2d;
+    margin: 20px 15px;
+  }
+
+  .MenuButton {
+    display: block;
+    align-items: center;
+    border: 0;
+  }
+
+  .Link {
+    text-decoration: none;
+    list-style-type: none;
+    color: black;
+  }
+
+  .linkArrow {
+    transform: rotate(-90deg);
+  }
+}
+
+.adminButton {
+  margin-top: 20px;
+  background-color: #fff000;
+  border-radius: 12px;
+  color: #000;
+  cursor: pointer;
+  font-weight: bold;
+  padding: 10px 15px;
+  text-align: center;
+  transition: 200ms;
+  width: 100%;
+  box-sizing: border-box;
+  border: 0;
+  font-size: 16px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+.adminButton:not(:disabled):hover,
+.adminButton:not(:disabled):focus {
+  outline: 0;
+  background: #f4e603;
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.2), 0 3px 8px 0 rgba(0, 0, 0, 0.15);
+}
+.adminButton:disabled {
+  filter: saturate(0.2) opacity(0.5);
+  -webkit-filter: saturate(0.2) opacity(0.5);
+  cursor: not-allowed;
+}
