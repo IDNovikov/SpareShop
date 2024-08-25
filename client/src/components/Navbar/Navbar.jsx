@@ -26,6 +26,9 @@ import white_arrow from "../../assets/Lolo.svg";
 import black_arrow from "../../assets/Black_arrow.svg";
 import YellowButton from "../UI/yellowButton/yellowButton";
 import TittleText from "../UI/tittleText";
+import ProductCourusel from "../UI/productCourusel/productCourusel.jsx";
+import BrandCourusel from "../UI/brandCourusel.jsx/brandCourusel.jsx";
+import AddressComponent from "../UI/addressComponent.jsx";
 
 const NavBar = () => {
   const [isOpen, setOpen] = useState(false);
@@ -277,6 +280,9 @@ const NavBar = () => {
           fontColor={"Black"}
         />
       </div>
+      <ProductCourusel width={"108px"} height={"108px"}/>
+      {windowWidth.current < 750 && <AddressComponent/>}
+      <BrandCourusel/>
       <Outlet />
     </div>
   );

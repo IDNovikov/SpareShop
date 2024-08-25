@@ -20,5 +20,6 @@
 }
 
 .button:active {
+  
   border: 2px solid #e7342b;
 }
