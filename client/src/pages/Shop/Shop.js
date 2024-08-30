@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
-import Typebar from "../../components/Typebar";
-import Sizebar from "../../components/Sizebar";
-import Colorbar from "../../components/Colorbar";
-import Brandbar from "../../components/Brandbar";
+import Typebar from "../../components/typeBar/Typebar";
+import Sizebar from "../../components/sizeBar/Sizebar";
+import Colorbar from "../../components/colorBar/Colorbar";
+import Brandbar from "../../components/brandBar/Brandbar";
 import Selectedbar from "../../components/Selectedbar";
 import Productlist from "../../components/Productlist";
 import { observer } from "mobx-react-lite";
@@ -36,10 +36,10 @@ const Shop = observer(() => {
 
   useEffect(() => {
     fetchProducts(
-      product.selectedTypes.id,
-      product.selectedColors.id,
-      product.selectedSizes.id,
-      product.selectedBrands.id,
+      product.selectedTypes,
+      product.selectedColors,
+      product.selectedSizes,
+      product.selectedBrands,
       product.page,
       9
     ).then((data) => {
@@ -60,7 +60,7 @@ const Shop = observer(() => {
         Catalog spearfishing items in Limassol{" "}
         <div className={style.items}>{product.products.length} items</div>
       </div>
-      <div>
+      <div style={{ display: "flex" }}>
         <div className={style.leftSideBar}>
           <nav
             className={`${isOpen ? style.menuNavActive : style.menuNav}`}

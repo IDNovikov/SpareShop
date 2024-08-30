@@ -8,7 +8,7 @@
   justify-content: space-between;
   align-items: center;
 }
-.radio {
+.checkbox {
   all: unset;
   width: 24px;
   height: 24px;
@@ -17,15 +17,16 @@
   opacity: 0px;
   background: #ffffff;
   border: 3px solid black;
-  border-radius: 50%;
+  border-radius: 4px;
 }
 
-.radio:checked {
-  border: 3px solid #2d2d2d;
-  background-color: #2d2d2d;
-  background-image: url("../../assets/Checked.svg");
+.checkbox:checked {
+  border: 3px solid black;
+  background-color: black;
+  background-image: url("../../assets/shape.svg");
   background-position: center;
   background-repeat: no-repeat;
+  background-size: 80%;
   padding: 0;
 }
 .arrow {
