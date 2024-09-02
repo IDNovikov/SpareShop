@@ -78,15 +78,16 @@ export const createProduct = async (product) => {
 };
 
 export const fetchProducts = async (
+  brandId,
   typeId,
   colorId,
   sizeId,
-  brandId,
+  prices,
   page,
   limit = 5
 ) => {
   const { data } = await $host.get("api/product", {
-    params: { typeId, brandId, colorId, sizeId, page, limit },
+    params: { brandId, typeId, colorId, sizeId, prices, page, limit },
   });
   return data;
 };

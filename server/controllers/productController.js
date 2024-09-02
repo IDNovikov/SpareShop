@@ -3,12 +3,17 @@ const path = require("path");
 const { Product, ProductInfo } = require("../models/models");
 const ApiError = require("../error/apiError");
 const fs = require("fs");
+const { Op } = require("sequelize");
 
 class ProductController {
   async create(req, res, next) {
     try {
-      let { name, price, brandId, typeId, sizeId, colorId, info } = req.body;
-
+      let { name, sizeId, colorId, info } = req.body;
+      let price = Number(req.body.price);
+      let brandId = Number(req.body.brandId);
+      let typeId = Number(req.body.typeId);
+      console.log(price);
+      console.log(req.body);
       const images = req.files;
       const data = [];
 
@@ -46,143 +51,45 @@ class ProductController {
       }
       return res.json(product);
     } catch (err) {
-      next(ApiError.badRequest(err.massage));
+      next(ApiError.badRequest("Error"));
     }
   }
 
   async getAll(req, res, next) {
     try {
-      let { brandId, typeId, colorId, sizeId, page, limit } = req.query;
-      page = page || 1;
-      limit = limit || 9;
-      let offset = page * limit - limit;
-      let products;
+      let {
+        brandId,
+        typeId,
+        colorId,
+        sizeId,
+        prices,
+        page = 1,
+        limit = 10,
+      } = req.query;
 
-      //1
-      if (brandId && typeId && colorId && sizeId) {
-        products = await Product.findAndCountAll({
-          where: { brandId, typeId, colorId, sizeId },
-          limit,
-          offset,
-        });
+      page = page - 1;
+      limit = parseInt(limit, 10);
+      let offset = page * limit;
+
+      let whereConditions = {};
+      if (brandId) whereConditions.brandId = brandId;
+      if (typeId) whereConditions.typeId = typeId;
+      if (colorId) whereConditions.colorId = colorId;
+      if (sizeId) whereConditions.sizeId = sizeId;
+
+      if (Array.isArray(prices) && prices.length === 2) {
+        const [minPrice, maxPrice] = prices.map(Number);
+        whereConditions.price = {
+          [Op.between]: [minPrice, maxPrice],
+        };
       }
-      //2
-      if (brandId && !typeId && !colorId && !sizeId) {
-        products = await Product.findAndCountAll({
-          where: { brandId },
-          limit,
-          offset,
-        });
-      }
-      //3
-      if (!brandId && typeId && !colorId && !sizeId) {
-        products = await Product.findAndCountAll({
-          where: { typeId },
-          limit,
-          offset,
-        });
-      }
-      //4
-      if (!brandId && !typeId && colorId && !sizeId) {
-        products = await Product.findAndCountAll({
-          where: { colorId },
-          limit,
-          offset,
-        });
-      }
-      //5
-      if (!brandId && !typeId && !colorId && sizeId) {
-        products = await Product.findAndCountAll({
-          where: { sizeId },
-          limit,
-          offset,
-        });
-      }
-      //6
-      if (brandId && typeId && !colorId && !sizeId) {
-        products = await Product.findAndCountAll({
-          where: { brandId, typeId },
-          limit,
-          offset,
-        });
-      }
-      //7
-      if (brandId && !typeId && colorId && !sizeId) {
-        products = await Product.findAndCountAll({
-          where: { brandId, colorId },
-          limit,
-          offset,
-        });
-      }
-      //8
-      if (brandId && !typeId && !colorId && sizeId) {
-        products = await Product.findAndCountAll({
-          where: { brandId, sizeId },
-          limit,
-          offset,
-        });
-      }
-      //9
-      if (!brandId && typeId && colorId && !sizeId) {
-        products = await Product.findAndCountAll({
-          where: { typeId, colorId },
-          limit,
-          offset,
-        });
-      }
-      //10
-      if (!brandId && typeId && !colorId && sizeId) {
-        products = await Product.findAndCountAll({
-          where: { typeId, sizeId },
-          limit,
-          offset,
-        });
-      }
-      //11
-      if (!brandId && !typeId && colorId && sizeId) {
-        products = await Product.findAndCountAll({
-          where: { colorId, sizeId },
-          limit,
-          offset,
-        });
-      }
-      //12
-      if (brandId && typeId && colorId && !sizeId) {
-        products = await Product.findAndCountAll({
-          where: { brandId, typeId, colorId },
-          limit,
-          offset,
-        });
-      }
-      //13
-      if (brandId && typeId && !colorId && sizeId) {
-        products = await Product.findAndCountAll({
-          where: { brandId, typeId, sizeId },
-          limit,
-          offset,
-        });
-      }
-      //14
-      if (brandId && !typeId && colorId && sizeId) {
-        products = await Product.findAndCountAll({
-          where: { brandId, colorId, sizeId },
-          limit,
-          offset,
-        });
-      }
-      //15
-      if (!brandId && typeId && colorId && sizeId) {
-        products = await Product.findAndCountAll({
-          where: { typeId, colorId, sizeId },
-          limit,
-          offset,
-        });
-      }
-      //16
-      if (!brandId && !typeId && !colorId && !sizeId) {
-        products = await Product.findAndCountAll({ limit, offset });
-      }
-      return res.json(products);
+      const products = await Product.findAndCountAll({
+        where: whereConditions,
+        limit,
+        offset,
+      });
+
+      res.json(products);
     } catch (err) {
       next(ApiError.badRequest(err.massage));
     }

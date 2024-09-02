@@ -12,120 +12,357 @@ import inst9 from "../../assets/inst9.png";
 import inst10 from "../../assets/inst10.png";
 import inst11 from "../../assets/inst11.png";
 import inst12 from "../../assets/inst12.png";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 const InstComp = (props) => {
+  const settings1 = {
+    className: "center",
+    centerMode: true,
+    infinite: true,
+    centerPadding: "10px",
+    slidesToShow: 2,
+    speed: 500,
+    rows: 2,
+    slidesPerRow: 2,
+  };
+
+  const settings2 = {
+    className: "center",
+    centerMode: true,
+    infinite: true,
+    centerPadding: "10px 10px",
+    slidesToShow: 1,
+    speed: 500,
+    rows: 2,
+    slidesPerRow: 2,
+  };
+
   const windowWidth = useRef(window.innerWidth);
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-        width: "100vw",
-        height: "auto",
-        padding: "32px 108px",
-        gap: "24px",
-        backgroundColor: "black",
-      }}
-    >
+    <div>
       <div
         style={{
-          fontFamily: "IBM Plex Sans",
-          fontSize: "24px",
-          fontWeight: "500",
-          lineHeight: "28px",
-          textAlign: "center",
-          color: "white",
-        }}
-      >
-        <p>Follow our instagram </p>
-        @spearshoplimassol
-      </div>
-      <a
-        style={{ textDecoration: "none" }}
-        href="https://www.instagram.com/spearshoplimassol"
-      >
-        <YellowButton
-          height={"52px"}
-          width={"250px"}
-          text={"Follow us"}
-          fontSize={"20px"}
-          fontColor={"Black"}
-        />
-      </a>
-
-      <div
-        style={{
-          width: "100vw",
-          padding: "15px",
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
-          gridGap: "10px",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
           justifyContent: "center",
-          justifyItems: "center",
+          width: "100vw",
+          height: "auto",
+          padding: "32px 108px",
+          gap: "24px",
+          backgroundColor: "black",
         }}
       >
-        {windowWidth.current > 861 ? (
-          <>
-            <div style={{ width: "200px", height: "200px" }}>
-              <img style={{ width: "200px", height: "200px" }} src={inst1} />
-            </div>
-            <div style={{ width: "200px", height: "200px" }}>
-              <img style={{ width: "200px", height: "200px" }} src={inst2} />
-            </div>
-            <div style={{ width: "200px", height: "200px" }}>
-              <img style={{ width: "200px", height: "200px" }} src={inst3} />
-            </div>
-            <div style={{ width: "200px", height: "200px" }}>
-              <img style={{ width: "200px", height: "200px" }} src={inst4} />
-            </div>
-            <div>
-              <img style={{ width: "200px", height: "200px" }} src={inst5} />
-            </div>
-            <div style={{ width: "200px", height: "200px" }}>
-              <img style={{ width: "200px", height: "200px" }} src={inst6} />
-            </div>
-            <div style={{ width: "200px", height: "200px" }}>
-              <img style={{ width: "200px", height: "200px" }} src={inst7} />
-            </div>
-            <div style={{ width: "200px", height: "200px" }}>
-              <img style={{ width: "200px", height: "200px" }} src={inst8} />
-            </div>
-            <div style={{ width: "200px", height: "200px" }}>
-              <img style={{ width: "200px", height: "200px" }} src={inst9} />
-            </div>
-            <div style={{ width: "200px", height: "200px" }}>
-              <img style={{ width: "200px", height: "200px" }} src={inst10} />
-            </div>
-            <div style={{ width: "200px", height: "200px" }}>
-              <img style={{ width: "200px", height: "200px" }} src={inst11} />
-            </div>
-            <div style={{ width: "200px", height: "200px" }}>
-              <img style={{ width: "200px", height: "200px" }} src={inst12} />
-            </div>
-          </>
+        <div
+          style={{
+            fontFamily: "IBM Plex Sans",
+            fontSize: "24px",
+            fontWeight: "500",
+            lineHeight: "28px",
+            textAlign: "center",
+            color: "white",
+          }}
+        >
+          <p>Follow our instagram </p>
+          @spearshoplimassol
+        </div>
+        <a
+          style={{ textDecoration: "none" }}
+          href="https://www.instagram.com/spearshoplimassol"
+        >
+          <YellowButton
+            height={"52px"}
+            width={"250px"}
+            text={"Follow us"}
+            fontSize={"20px"}
+            fontColor={"Black"}
+          />
+        </a>
+      </div>
+      <div style={{ backgroundColor: "black" }}>
+        {windowWidth.current > 700 ? (
+          <div className="slider-container">
+            <Slider {...settings1}>
+              <div style={{ width: "200px", height: "200px" }}>
+                <img
+                  style={{
+                    width: "200px",
+                    height: "200px",
+                    marginLeft: "auto",
+                    marginRight: "auto",
+                  }}
+                  src={inst1}
+                />
+              </div>
+              <div style={{ width: "200px", height: "200px" }}>
+                <img
+                  style={{
+                    width: "200px",
+                    height: "200px",
+                    marginLeft: "auto",
+                    marginRight: "auto",
+                  }}
+                  src={inst2}
+                />
+              </div>
+              <div style={{ width: "200px", height: "200px" }}>
+                <img
+                  style={{
+                    width: "200px",
+                    height: "200px",
+                    marginLeft: "auto",
+                    marginRight: "auto",
+                  }}
+                  src={inst3}
+                />
+              </div>
+              <div style={{ width: "200px", height: "200px" }}>
+                <img
+                  style={{
+                    width: "200px",
+                    height: "200px",
+                    marginLeft: "auto",
+                    marginRight: "auto",
+                  }}
+                  src={inst4}
+                />
+              </div>
+              <div>
+                <img
+                  style={{
+                    width: "200px",
+                    height: "200px",
+                    marginLeft: "auto",
+                    marginRight: "auto",
+                  }}
+                  src={inst5}
+                />
+              </div>
+              <div
+                style={{
+                  width: "200px",
+                  height: "200px",
+                  marginLeft: "auto",
+                  marginRight: "auto",
+                }}
+              >
+                <img
+                  style={{
+                    width: "200px",
+                    height: "200px",
+                    marginLeft: "auto",
+                    marginRight: "auto",
+                  }}
+                  src={inst6}
+                />
+              </div>
+              <div style={{ width: "200px", height: "200px" }}>
+                <img
+                  style={{
+                    width: "200px",
+                    height: "200px",
+                    marginLeft: "auto",
+                    marginRight: "auto",
+                  }}
+                  src={inst7}
+                />
+              </div>
+              <div style={{ width: "200px", height: "200px" }}>
+                <img
+                  style={{
+                    width: "200px",
+                    height: "200px",
+                    marginLeft: "auto",
+                    marginRight: "auto",
+                  }}
+                  src={inst8}
+                />
+              </div>
+              <div style={{ width: "200px", height: "200px" }}>
+                <img
+                  style={{
+                    width: "200px",
+                    height: "200px",
+                    marginLeft: "auto",
+                    marginRight: "auto",
+                  }}
+                  src={inst9}
+                />
+              </div>
+              <div style={{ width: "200px", height: "200px" }}>
+                <img
+                  style={{
+                    width: "200px",
+                    height: "200px",
+                    marginLeft: "auto",
+                    marginRight: "auto",
+                  }}
+                  src={inst10}
+                />
+              </div>
+              <div style={{ width: "200px", height: "200px" }}>
+                <img
+                  style={{
+                    width: "200px",
+                    height: "200px",
+                    marginLeft: "auto",
+                    marginRight: "auto",
+                  }}
+                  src={inst11}
+                />
+              </div>
+              <div style={{ width: "200px", height: "200px" }}>
+                <img
+                  style={{
+                    width: "200px",
+                    height: "200px",
+                    marginLeft: "auto",
+                    marginRight: "auto",
+                  }}
+                  src={inst12}
+                />
+              </div>
+            </Slider>
+          </div>
         ) : (
-          <>
-            <div style={{ width: "190px", height: "190px" }}>
-              <img style={{ width: "190px", height: "190px" }} src={inst7} />
-            </div>
-            <div style={{ width: "190px", height: "190px" }}>
-              <img style={{ width: "190px", height: "190px" }} src={inst8} />
-            </div>
-            <div style={{ width: "190px", height: "190px" }}>
-              <img style={{ width: "190px", height: "190px" }} src={inst9} />
-            </div>
-            <div style={{ width: "190px", height: "190px" }}>
-              <img style={{ width: "190px", height: "190px" }} src={inst10} />
-            </div>
-            <div style={{ width: "190px", height: "190px" }}>
-              <img style={{ width: "190px", height: "190px" }} src={inst11} />
-            </div>
-            <div style={{ width: "190px", height: "190px" }}>
-              <img style={{ width: "190px", height: "190px" }} src={inst12} />
-            </div>
-          </>
+          <div className="slider-container">
+            <Slider {...settings2}>
+              <div style={{ width: "170px", height: "170px" }}>
+                <img
+                  style={{
+                    width: "170px",
+                    height: "170px",
+                    marginLeft: "auto",
+                    marginRight: "auto",
+                  }}
+                  src={inst1}
+                />
+              </div>
+              <div style={{ width: "170px", height: "170px" }}>
+                <img
+                  style={{
+                    width: "170px",
+                    height: "170px",
+                    marginLeft: "auto",
+                    marginRight: "auto",
+                  }}
+                  src={inst2}
+                />
+              </div>
+              <div style={{ width: "170px", height: "170px" }}>
+                <img
+                  style={{
+                    width: "170px",
+                    height: "170px",
+                    marginLeft: "auto",
+                    marginRight: "auto",
+                  }}
+                  src={inst3}
+                />
+              </div>
+              <div style={{ width: "170px", height: "170px" }}>
+                <img
+                  style={{
+                    width: "170px",
+                    height: "170px",
+                    marginLeft: "auto",
+                    marginRight: "auto",
+                  }}
+                  src={inst4}
+                />
+              </div>
+              <div>
+                <img
+                  style={{
+                    width: "170px",
+                    height: "170px",
+                    marginLeft: "auto",
+                    marginRight: "auto",
+                  }}
+                  src={inst5}
+                />
+              </div>
+              <div style={{ width: "170px", height: "170px" }}>
+                <img
+                  style={{
+                    width: "170px",
+                    height: "170px",
+                    marginLeft: "auto",
+                    marginRight: "auto",
+                  }}
+                  src={inst6}
+                />
+              </div>
+              <div style={{ width: "170px", height: "170px" }}>
+                <img
+                  style={{
+                    width: "170px",
+                    height: "170px",
+                    marginLeft: "auto",
+                    marginRight: "auto",
+                  }}
+                  src={inst7}
+                />
+              </div>
+              <div style={{ width: "170px", height: "170px" }}>
+                <img
+                  style={{
+                    width: "170px",
+                    height: "170px",
+                    marginLeft: "auto",
+                    marginRight: "auto",
+                  }}
+                  src={inst8}
+                />
+              </div>
+              <div style={{ width: "170px", height: "170px" }}>
+                <img
+                  style={{
+                    width: "170px",
+                    height: "170px",
+                    marginLeft: "auto",
+                    marginRight: "auto",
+                  }}
+                  src={inst9}
+                />
+              </div>
+              <div style={{ width: "170px", height: "170px" }}>
+                <img
+                  style={{
+                    width: "170px",
+                    height: "170px",
+                    marginLeft: "auto",
+                    marginRight: "auto",
+                  }}
+                  src={inst10}
+                />
+              </div>
+              <div style={{ width: "170px", height: "170px" }}>
+                <img
+                  style={{
+                    width: "170px",
+                    height: "170px",
+                    marginLeft: "auto",
+                    marginRight: "auto",
+                  }}
+                  src={inst11}
+                />
+              </div>
+              <div style={{ width: "170px", height: "170px" }}>
+                <img
+                  style={{
+                    width: "170px",
+                    height: "170px",
+                    marginLeft: "auto",
+                    marginRight: "auto",
+                  }}
+                  src={inst12}
+                />
+              </div>
+            </Slider>
+          </div>
         )}
       </div>
     </div>

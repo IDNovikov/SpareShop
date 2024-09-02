@@ -6,20 +6,19 @@
   align-items: center;
   border-radius: 4px;
   opacity: 0px;
-  background: #fff500;
   text-decoration: none;
   list-style-type: none;
   font-family: "IBM Plex Sans";
   font-weight: 500;
   line-height: 24px;
   text-align: center;
-  border: 2px solid black;
+  border: 1px solid white;
 }
 
 .button:hover {
-  background-color: #e0d900;
+  border: 1px solid #2d2d2d;
 }
 
 .button:active {
-  border: 2px solid #e7342b;
+  background-color: #e9eaea;
 }

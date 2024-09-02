@@ -25,7 +25,6 @@ import lupa from "../../assets/Lupa.svg";
 import white_arrow from "../../assets/Lolo.svg";
 import black_arrow from "../../assets/Black_arrow.svg";
 import YellowButton from "../UI/yellowButton/yellowButton";
-import TittleText from "../UI/tittleText";
 import ProductCourusel from "../UI/productCourusel/productCourusel.jsx";
 import BrandCourusel from "../UI/brandCourusel.jsx/brandCourusel.jsx";
 import AddressComponent from "../UI/addressComponent.jsx";
@@ -250,29 +249,12 @@ const NavBar = () => {
             </nav>
           </>
         )}
-
-        {user.isAuth && (
-          <div>
-            <button
-              className={desk.adminButton}
-              onClick={() => navigate(ADMIN_ROUTE)}
-            >
-              Admin panel
-            </button>
-            <button className={desk.adminButton} onClick={() => logOut()}>
-              Logout
-            </button>
-          </div>
-        )}
       </div>
       <div className={desk.wallpaper}>
-        <TittleText
-          margin={""}
-          width={""}
-          height={""}
-          fontSize={"123px"}
-          fontWeight={"400"}
-        />
+        <div className={desk.tittleText}>
+          Spearfishing <p>Store</p>
+        </div>
+
         <YellowButton
           height={"52px"}
           width={"250px"}

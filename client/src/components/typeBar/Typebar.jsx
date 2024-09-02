@@ -19,7 +19,7 @@ const TypeBar = observer(() => {
           width: "100%",
         }}
       >
-        <li className={styles.menuButtom}>Types</li>
+        <li className={styles.menuButtom}>Products</li>
         <img
           src={black_arrow}
           className={`${isOpen ? styles.arrow : styles.rewerse}`}
