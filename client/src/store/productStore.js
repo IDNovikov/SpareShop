@@ -20,6 +20,7 @@ export default class ProductStore {
     this._selectedSizes = [];
     this._selectedSizesName = [];
     this._selectedPrices = [];
+    this._selectedSearch = {};
 
     this._page = 1;
     this._totalCount = 9;
@@ -138,6 +139,10 @@ export default class ProductStore {
     this._selectedPrices = arr;
   }
 
+  setSelectedSearch(value) {
+    this._selectedSearch = value;
+  }
+
   setPage(page) {
     this._page = page;
   }
@@ -192,6 +197,10 @@ export default class ProductStore {
   }
   get selectedPrices() {
     return this._selectedPrices;
+  }
+
+  get selectedSearch() {
+    return this._selectedSearch;
   }
 
   get totalCount() {

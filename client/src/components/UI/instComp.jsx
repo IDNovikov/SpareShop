@@ -18,6 +18,7 @@ import "slick-carousel/slick/slick-theme.css";
 
 const InstComp = (props) => {
   const settings1 = {
+    arrows: false,
     className: "center",
     centerMode: true,
     infinite: true,
@@ -29,6 +30,7 @@ const InstComp = (props) => {
   };
 
   const settings2 = {
+    arrows: false,
     className: "center",
     centerMode: true,
     infinite: true,

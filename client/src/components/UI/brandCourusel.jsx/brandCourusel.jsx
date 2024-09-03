@@ -14,6 +14,7 @@ import "slick-carousel/slick/slick-theme.css";
 
 const BrandCourusel = (props) => {
   const settings = {
+    arrows: false,
     className: "center",
     infinite: true,
     centerPadding: "60px",

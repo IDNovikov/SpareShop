@@ -14,7 +14,7 @@ import BasketButton from "../UI/basketButton";
 import desk from "./DesktopNavbar.module.css";
 import CircleButton from "../UI/circleButtom";
 import heart from "../../assets/heart.svg";
-import heart_black from "../../assets/heart.png";
+import heart_black from "../../assets/blackheart.svg";
 import inst from "../../assets/inst.png";
 import logo from "../../assets/LogoPlace.png";
 import HeaderText from "../UI/headerText";

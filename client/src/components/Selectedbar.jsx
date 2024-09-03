@@ -1,33 +1,31 @@
-import React, { useContext } from "react"
-import {observer} from "mobx-react-lite"
-import { ListGroup } from "react-bootstrap"
-import { Context } from ".."
-
-
+import React, { useContext } from "react";
+import { observer } from "mobx-react-lite";
+import { ListGroup } from "react-bootstrap";
+import { Context } from "..";
 
 const Selectedbar = observer(() => {
+  const { product } = useContext(Context);
 
-    const {product} = useContext(Context)
-
-    return (
+  return (
+    <div>
+      {product.selectedBrands ? (
+        <div></div>
+      ) : (
         <div>
-  
-    {product.selectedBrands? <ListGroup>
-        СЮДА можно вставить функционал
-        </ListGroup>
-    :
-    <ListGroup>
-        {product.selectedBrands.map(brand => 
-            <ListGroup.Item 
-            slyle ={{cursor : 'pointer'}}
-            onClick = {() => product.setSelectedBrands(null)}
-            key = {brand.id}> {brand.name} </ListGroup.Item>
-        )
-        }
-    </ListGroup>
-}
+          {product.selectedBrands.map((brand) => (
+            <div
+              slyle={{ cursor: "pointer" }}
+              onClick={() => product.setSelectedBrands(null)}
+              key={brand.id}
+            >
+              {" "}
+              {brand.name}{" "}
+            </div>
+          ))}
         </div>
-    )
-})
+      )}
+    </div>
+  );
+});
 
-export default Selectedbar
+export default Selectedbar;

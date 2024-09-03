@@ -14,6 +14,7 @@ import "slick-carousel/slick/slick-theme.css";
 
 const ProductCourusel = (props) => {
   const settings = {
+    arrows: false,
     className: "center",
     infinite: true,
     centerPadding: "160px",

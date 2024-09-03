@@ -63,10 +63,11 @@ class ProductController {
         colorId,
         sizeId,
         prices,
+        search,
         page = 1,
         limit = 10,
       } = req.query;
-
+      console.log(search);
       page = page - 1;
       limit = parseInt(limit, 10);
       let offset = page * limit;
@@ -81,6 +82,11 @@ class ProductController {
         const [minPrice, maxPrice] = prices.map(Number);
         whereConditions.price = {
           [Op.between]: [minPrice, maxPrice],
+        };
+      }
+      if (search) {
+        whereConditions.name = {
+          [Op.iLike]: `%${search}%`,
         };
       }
       const products = await Product.findAndCountAll({

@@ -13,7 +13,7 @@ import {
   deleteProduct,
 } from "../../http/productAPI";
 import { observer } from "mobx-react-lite";
-import Productlist from "../Productlist";
+import Productlist from "../ProductList/Productlist";
 
 const CreateProduct = observer(() => {
   const { product } = useContext(Context);

@@ -8,6 +8,7 @@
   gap: 0px;
   opacity: 0px;
   background-color: black;
+  overflow-x: hidden;
 }
 
 .wallpaper {
@@ -117,6 +118,7 @@ a {
   }
   .main {
     height: 96px;
+    overflow-x: hidden;
   }
   .header_inform {
     display: none;
@@ -134,8 +136,8 @@ a {
     top: 100px;
   }
   .menuNav {
-    position: absolute;
-    right: -225px;
+    position: fixed;
+    right: -220px;
     display: flex;
     flex-direction: column;
     width: 220px;
@@ -148,7 +150,7 @@ a {
   .menuNavActive {
     display: flex;
     overflow: auto;
-    transform: translateX(-220px);
+    transform: translateX(-100%);
   }
 
   .headerNavList {

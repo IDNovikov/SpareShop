@@ -4,7 +4,7 @@ import Sizebar from "../../components/sizeBar/Sizebar";
 import Colorbar from "../../components/colorBar/Colorbar";
 import Brandbar from "../../components/brandBar/Brandbar";
 import Selectedbar from "../../components/Selectedbar";
-import Productlist from "../../components/Productlist";
+import Productlist from "../../components/ProductList/Productlist";
 import { observer } from "mobx-react-lite";
 import { Context } from "../..";
 import {
@@ -24,11 +24,20 @@ import lupa from "../../assets/blacklupa.svg";
 
 const Shop = observer(() => {
   const [isOpen, setOpen] = useState(false);
-  const [search, setSearch] = useState(true);
+  const [search, setSearch] = useState(false);
+  const [searchValue, setSearchValue] = useState("");
   const menuRef = useRef(null);
   const windowWidth = useRef(window.innerWidth);
   const { product } = useContext(Context);
 
+  const handleSearch = (value) => {
+    if (value) {
+      product.setSelectedSearch(value);
+    } else if (!value) {
+      value = null;
+      product.setSelectedSearch(value);
+    }
+  };
   useEffect(() => {
     fetchTypes().then((data) => product.setTypes(data));
     fetchBrands().then((data) => product.setBrands(data));
@@ -47,6 +56,7 @@ const Shop = observer(() => {
       product.selectedColors,
       product.selectedSizes,
       product.selectedPrices,
+      product.selectedSearch,
       product.page,
       9
     ).then((data) => {
@@ -60,6 +70,7 @@ const Shop = observer(() => {
     product.selectedSizes,
     product.selectedBrands,
     product.selectedPrices,
+    product.selectedSearch,
   ]);
 
   return (
@@ -94,12 +105,13 @@ const Shop = observer(() => {
               </ul>
             </nav>
           </div>
-          <div>
+          <div style={{ width: "100%" }}>
             <div
               style={{
                 display: "flex",
                 flexDirection: "row",
                 justifyContent: "space-between",
+                width: "100%",
               }}
             >
               <Selectedbar />
@@ -108,10 +120,12 @@ const Shop = observer(() => {
                   type="search"
                   placeholder="Search"
                   className={style.search}
+                  value={searchValue}
+                  onChange={(e) => setSearchValue(e.target.value)}
                 />
                 <button
                   className={style.searchBtn}
-                  onClick={() => alert("Not working")}
+                  onClick={() => handleSearch(searchValue)}
                 >
                   <img className={style.btnLupa} src={lupa} />
                 </button>
@@ -154,10 +168,12 @@ const Shop = observer(() => {
               type="search"
               placeholder="Search"
               className={style.search}
+              value={searchValue}
+              onChange={(e) => setSearchValue(e.target.value)}
             />
             <button
               className={style.searchBtn}
-              onClick={() => alert("Not working")}
+              onClick={() => handleSearch(searchValue)}
             >
               <img className={style.btnLupa} src={lupa} />
             </button>
