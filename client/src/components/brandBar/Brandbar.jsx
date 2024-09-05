@@ -10,7 +10,11 @@ const Brandbar = observer(() => {
   const menuRef = useRef(null);
 
   return (
-    <li className={styles.dropMenu} ref={menuRef}>
+    <li
+      className={styles.dropMenu}
+      ref={menuRef}
+      style={{ backgroundColor: "#f5f5f5" }}
+    >
       <div
         onClick={() => setOpen(!isOpen)}
         style={{

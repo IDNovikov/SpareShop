@@ -1,13 +1,13 @@
-import React, { useContext } from "react";
-import { Button, Card, Col } from "react-bootstrap";
-
+import React, { useContext, useEffect } from "react";
+import { observer } from "mobx-react-lite";
 import Heart from "../../assets/heart.png";
 import { useNavigate } from "react-router-dom";
 import { PRODUCT_ROUTE } from "../../utils/consts";
 import { Context } from "../..";
 import style from "./ProductItem.module.css";
+import redheart from "../../assets/redheart.png";
 
-const Productitem = ({ propProduct, admin }) => {
+const Productitem = observer(({ propProduct, admin }) => {
   const { favorites } = useContext(Context);
   const { product } = useContext(Context);
   const navigate = useNavigate();
@@ -15,7 +15,20 @@ const Productitem = ({ propProduct, admin }) => {
   const add = () => {
     favorites.addProduct(propProduct);
   };
+  const isFavorites = (id) => {
+    let isOK = false;
 
+    favorites.favorites.map((elem) => {
+      if (elem.id == id) {
+        return (isOK = true);
+      }
+    });
+    return isOK;
+  };
+
+  const handleDelete = (id) => {
+    favorites.deleteFavorite(id);
+  };
   let array;
   const set = () => {
     let string = propProduct.img;
@@ -27,7 +40,15 @@ const Productitem = ({ propProduct, admin }) => {
   return (
     <div className={style.mainItem}>
       <div className={style.inner}>
-        <img className={style.Heart} src={Heart} onClick={add} />
+        {!isFavorites(propProduct.id) ? (
+          <img className={style.Heart} src={Heart} onClick={add} />
+        ) : (
+          <img
+            className={style.Heart}
+            src={redheart}
+            onClick={() => handleDelete(propProduct.id)}
+          />
+        )}
         <img
           onClick={() => navigate(PRODUCT_ROUTE + "/" + propProduct.id)}
           className={style.Image}
@@ -50,6 +71,5 @@ const Productitem = ({ propProduct, admin }) => {
       </div>
     </div>
   );
-};
-
+});
 export default Productitem;

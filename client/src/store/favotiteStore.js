@@ -32,10 +32,10 @@ export default class FavoriteStore {
     }
   }
 
-  deleteProduct(id) {
-    this._favorites.forEach((product, ind) => {
+  deleteFavorite(id) {
+    this._favorites.map((product, ind) => {
       if (product.id == id) {
-        this._favorites.splice(ind, 1);
+        return this._favorites.splice(ind, 1);
       }
     });
     localStorage.removeItem("favorites");

@@ -14,11 +14,11 @@ import Admin from "./pages/Admin";
 import Shop from "./pages/Shop/Shop.js";
 import Certificate from "./pages/Certificate";
 import Blog from "./pages/Blog";
-import Basket from "./components/modals/basketModal";
+import Basket from "./components/modals/BasketModal/basketModal.jsx";
 import ProductPage from "./pages/ProductPage";
 import Auth from "./pages/Auth.js";
 import PostPage from "./pages/PostPage";
-import Order from "./components/modals/orderModal";
+import Order from "./components/modals/OrderModal/orderModal";
 
 export const authRoutes = [
   {

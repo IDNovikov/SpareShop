@@ -13,8 +13,6 @@ import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 import BasketButton from "../UI/basketButton";
 import desk from "./DesktopNavbar.module.css";
 import CircleButton from "../UI/circleButtom";
-import heart from "../../assets/heart.svg";
-import heart_black from "../../assets/blackheart.svg";
 import inst from "../../assets/inst.png";
 import logo from "../../assets/LogoPlace.png";
 import HeaderText from "../UI/headerText";
@@ -24,11 +22,7 @@ import cont from "../../assets/Container.svg";
 import lupa from "../../assets/Lupa.svg";
 import white_arrow from "../../assets/Lolo.svg";
 import black_arrow from "../../assets/Black_arrow.svg";
-import YellowButton from "../UI/yellowButton/yellowButton";
-import ProductCourusel from "../UI/productCourusel/productCourusel.jsx";
-import BrandCourusel from "../UI/brandCourusel.jsx/brandCourusel.jsx";
-import AddressComponent from "../UI/addressComponent.jsx";
-import InstComp from "../UI/instComp.jsx";
+import Favorites from "../Favorites/Favorites.jsx";
 
 const NavBar = () => {
   const [isOpen, setOpen] = useState(false);
@@ -96,12 +90,8 @@ const NavBar = () => {
                 />
               </div>
               <div className={desk.menu}>
-                <CircleButton
-                  img={heart_black}
-                  width={"24px"}
-                  height={"24px"}
-                  bckgrnd={"white"}
-                />
+                <Favorites />
+
                 <Link to={BASKET_ROUTE} state={{ background: location }}>
                   <BasketButton />
                 </Link>
@@ -152,12 +142,7 @@ const NavBar = () => {
                 />
               </div>
               <div className={desk.menu}>
-                <CircleButton
-                  img={heart}
-                  width={"24px"}
-                  height={"24px"}
-                  bckgrnd={"black"}
-                />
+                <Favorites />
                 <CircleButton
                   img={lupa}
                   width={"24px"}
@@ -250,23 +235,7 @@ const NavBar = () => {
           </>
         )}
       </div>
-      <div className={desk.wallpaper}>
-        <div className={desk.tittleText}>
-          Spearfishing <p>Store</p>
-        </div>
 
-        <YellowButton
-          height={"52px"}
-          width={"250px"}
-          text={"Shop now"}
-          fontSize={"20px"}
-          fontColor={"Black"}
-        />
-      </div>
-      <ProductCourusel width={"108px"} height={"108px"} />
-      {windowWidth.current < 750 && <AddressComponent />}
-      <BrandCourusel />
-      <InstComp />
       <Outlet />
     </div>
   );

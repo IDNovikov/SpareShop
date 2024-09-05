@@ -9,7 +9,7 @@ const Productlist = observer((props) => {
 
   return (
     <div className={style.productGrid}>
-      {product.products.map((product) => (
+      {product.products.map((product, ind) => (
         <div className={style.productItem}>
           <Productitem
             key={product.id}
