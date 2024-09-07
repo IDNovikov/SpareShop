@@ -13,6 +13,7 @@ import H2Medium from "../../UI/H2regular";
 import H1Medium from "../../UI/H1Medium";
 import YellowButton from "../../UI/yellowButton/yellowButton";
 import H1regular from "../../UI/H1regular";
+import GreyButton from "../../UI/greyButton/GreyButton";
 const BasketModal = observer(() => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -20,19 +21,24 @@ const BasketModal = observer(() => {
   const { basket } = useContext(Context);
 
   const [value, setValue] = useState();
-  const [certi, setCerti] = useState(0);
-  const [modal, setModal] = useState(false);
-
-  console.log(certi);
+  const [certi, setCerti] = useState("");
+  const [orderModal, setModal] = useState(false);
+  const [isCertyValid, setCertiValid] = useState(true);
 
   const checkCerti = () => {
     if (value) {
       checkCertificate({ uniqId: value }).then((data) => {
-        setCerti(JSON.parse(data));
+        if (data != 0) {
+          return setCerti(JSON.parse(data)), setCertiValid(true);
+        }
+
+        return setCertiValid(false), setCerti("");
       });
     } else {
-      setValue("Wrong certificate`s ID");
+      return setCertiValid(true), setCerti("");
     }
+
+    console.log(isCertyValid);
   };
 
   const addToBasket = (product) => {
@@ -44,13 +50,29 @@ const BasketModal = observer(() => {
   };
 
   let sum = 0;
+  let discont = 0;
   const cost = (basket, certi) => {
     if (!certi) {
-      console.log(certi);
       basket.basket.map((product) => (sum += Number(product.price)));
     } else {
       basket.basket.map((product) => (sum += Number(product.price)));
-      sum = sum - Number(certi.amount);
+      discont = sum - Number(certi.amount);
+    }
+  };
+  let Price = () => {
+    if (discont != 0) {
+      return (
+        <div style={{ display: "flex" }}>
+          <span>
+            <H2Medium decor={"line-through"} text={`€ ${sum}`} />
+          </span>
+          <span style={{ marginLeft: "10px" }}>
+            <H1Medium color={"#00B907"} text={`€ ${discont}`} />
+          </span>
+        </div>
+      );
+    } else {
+      return <H1Medium text={`€ ${sum}`} />;
     }
   };
   cost(basket, certi);
@@ -105,51 +127,53 @@ const BasketModal = observer(() => {
               </div>
             </div>
           ) : (
-            <>
-              <div className={styles.modal}>
+            <div className={styles.modal}>
+              <div>
+                {basket.basket.map((product, ind) => {
+                  return (
+                    <BasketItem
+                      key={ind}
+                      product={product}
+                      delete={deleteFromBasket}
+                      add={addToBasket}
+                    />
+                  );
+                })}
+              </div>
+              <div
+                style={{
+                  width: "100%",
+                  display: "flex",
+                  justifyContent: "space-between",
+                  margin: "15px 0px",
+                  padding: "0px 10px",
+                }}
+              >
+                <H2Medium text={`Subtotal (${basket.basket.length}): `} />{" "}
+                <Price />
+              </div>
+              <div
+                style={{
+                  padding: "0px 10px",
+                }}
+              >
+                <H2Medium text={"Gift certificate"} />
+                {/* Нужно изменить кнопку. При вводе сертификата, она должна гореть красным если не правильно */}
                 <div>
-                  {basket.basket.map((product, ind) => {
-                    return (
-                      <BasketItem
-                        key={ind}
-                        product={product}
-                        delete={deleteFromBasket}
-                        add={addToBasket}
-                      />
-                    );
-                  })}
+                  <form>
+                    <input
+                      className={`${styles.search} ${
+                        !isCertyValid ? styles.break : ""
+                      }`}
+                      value={value}
+                      onChange={(e) => setValue(e.target.value)}
+                      onBlur={checkCerti}
+                      placeholder="Code"
+                    />
+                  </form>
                 </div>
-                <div
-                  style={{
-                    width: "100%",
-                    display: "flex",
-                    justifyContent: "space-between",
-                    margin: "15px 0px",
-                    padding: "0px 10px",
-                  }}
-                >
-                  <H2Medium text={`Subtotal (${basket.basket.length}): `} />
-                  <H1Medium text={`€ ${sum}`} />
-                </div>
-                <div
-                  style={{
-                    padding: "0px 10px",
-                  }}
-                >
-                  <H2Medium text={"Gift certificate"} />
-                  {/* Нужно изменить кнопку. При вводе сертификата, она должна гореть красным если не правильно */}
-                  <div>
-                    <form>
-                      <input
-                        className={styles.search}
-                        value={value}
-                        onChange={(e) => setValue(e.target.value)}
-                        onBlur={checkCerti}
-                        placeholder="Code"
-                      />
-                    </form>
-                  </div>
-                </div>
+              </div>
+              {isCertyValid ? (
                 <div
                   style={{
                     display: "flex",
@@ -157,6 +181,7 @@ const BasketModal = observer(() => {
                     justifyContent: "center",
                     marginTop: "15px",
                   }}
+                  onClick={() => setModal(true)}
                 >
                   <YellowButton
                     height={"42px"}
@@ -166,16 +191,37 @@ const BasketModal = observer(() => {
                     fontColor={"Black"}
                   />
                 </div>
-              </div>
-            </>
+              ) : (
+                <div
+                  style={{
+                    display: "flex",
+                    width: "100%",
+                    justifyContent: "center",
+                    marginTop: "15px",
+                  }}
+                >
+                  <GreyButton
+                    height={"42px"}
+                    width={"calc(100% - 20px)"}
+                    text={"Checkout"}
+                    fontSize={"20px"}
+                    fontColor={"Black"}
+                  />
+                </div>
+              )}
+            </div>
           )}
 
-          {modal && (
+          {orderModal && (
             <OrderModal
+              discont={discont}
+              sum={sum}
+              total={basket.basket.length}
               basket={basket}
               certi={certi}
               setModal={setModal}
               amount={sum}
+              close={() => navigate(-1)}
             />
           )}
         </>

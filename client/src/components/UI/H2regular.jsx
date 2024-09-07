@@ -1,6 +1,15 @@
 import React from "react";
 
-const H2Medium = ({ text, align }) => {
+const H2Medium = ({ text, align, size, decor, color }) => {
+  if (!size) {
+    size = "20px";
+  }
+  if (!decor) {
+    decor = "none";
+  }
+  if (!color) {
+    color = "#636363";
+  }
   return (
     <div>
       <style>
@@ -12,11 +21,12 @@ const H2Medium = ({ text, align }) => {
       <div
         style={{
           fontFamily: "IBM Plex Sans",
-          fontSize: "20px",
+          fontSize: size,
           fontWeight: "400",
           lineHeight: "24px",
           textAlign: align,
-          color: "#636363",
+          color: color,
+          textDecoration: decor,
         }}
       >
         {text}

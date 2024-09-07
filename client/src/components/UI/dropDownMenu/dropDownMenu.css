@@ -37,8 +37,8 @@
 }
 
 .drop_menu_list_dropped {
-  position: absolute;
-  top: 20px;
+  position: fixed;
+  top: 240px;
   z-index: 99;
   width: 25vw;
   max-width: 270px;
