@@ -12,7 +12,7 @@ import {
 } from "./utils/consts";
 import Admin from "./pages/Admin";
 import Shop from "./pages/Shop/Shop.js";
-import Certificate from "./pages/Certificate";
+import Certificate from "./pages/Certi/Certificate";
 import Blog from "./pages/Blog";
 import Basket from "./components/modals/BasketModal/basketModal.jsx";
 import ProductPage from "./pages/ProductPage";

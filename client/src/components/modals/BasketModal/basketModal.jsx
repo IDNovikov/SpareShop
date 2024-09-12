@@ -106,7 +106,10 @@ const BasketModal = observer(() => {
                 />
               </div>
               <div>
-                <Link style={{ color: "black" }} to={SHOP_ROUTE}>
+                <Link
+                  style={{ color: "black", textDecoration: "none" }}
+                  to={SHOP_ROUTE}
+                >
                   <div
                     style={{
                       display: "flex",
@@ -118,7 +121,7 @@ const BasketModal = observer(() => {
                     <YellowButton
                       height={"42px"}
                       width={"328px"}
-                      text={"Checkout"}
+                      text={"Catalog"}
                       fontSize={"20px"}
                       fontColor={"Black"}
                     />

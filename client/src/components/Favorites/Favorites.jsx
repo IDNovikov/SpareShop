@@ -7,12 +7,14 @@ import { observer } from "mobx-react-lite";
 import CircleButton from "../UI/circleButtom";
 import style from "./Favorites.module.css";
 import X from "../../assets/black-X.svg";
-import { useNavigate } from "react-router-dom";
-import { PRODUCT_ROUTE } from "../../utils/consts";
+import { Link, useNavigate } from "react-router-dom";
+import { PRODUCT_ROUTE, SHOP_ROUTE } from "../../utils/consts";
 import fbh from "../../assets/fulledBlackheart.svg";
 import basketImg from "../../assets/basket.svg";
 import redheart from "../../assets/redheart.png";
 import { useClickOutside } from "../../hooks/useClickOutside";
+import YellowButton from "../UI/yellowButton/yellowButton";
+import H1regular from "../UI/H1regular";
 
 const Favorites = observer(() => {
   const navigate = useNavigate();
@@ -52,7 +54,6 @@ const Favorites = observer(() => {
     basket.addProduct(product);
     favorites.deleteFavorite(id);
   };
-
   return (
     <>
       <div>
@@ -105,66 +106,120 @@ const Favorites = observer(() => {
               </div>
             </div>
             <div className={style.modal}>
-              {favorites.favorites.map((elem, ind) => {
-                return (
-                  <div className={style.item}>
-                    <img
-                      className={style.Image}
-                      onClick={() => navigate(PRODUCT_ROUTE + "/" + elem.id)}
-                      src={process.env.REACT_APP_API_URL + set(elem)}
+              {favorites.favorites[0] ? (
+                <>
+                  {" "}
+                  {favorites.favorites.map((elem, ind) => {
+                    return (
+                      <div className={style.item}>
+                        <img
+                          className={style.Image}
+                          onClick={() =>
+                            navigate(PRODUCT_ROUTE + "/" + elem.id)
+                          }
+                          src={process.env.REACT_APP_API_URL + set(elem)}
+                        />
+                        <div
+                          style={{
+                            width: "inherit",
+                            paddingLeft: "5px",
+                            justifyContent: "space-between",
+                            display: "flex",
+                            flexDirection: "column",
+                          }}
+                        >
+                          <div
+                            style={{
+                              width: "100%",
+                              display: "flex",
+                              flexDirection: "row",
+                              justifyContent: "space-between",
+                            }}
+                          >
+                            <div
+                              style={{
+                                display: "flex",
+                                flexDirection: "column",
+                              }}
+                            >
+                              <div className={style.Name}>{elem.name}</div>
+                              <div className={style.Brand}>
+                                {product.brands.map((el) => {
+                                  if (el.id == elem.brandId) {
+                                    return el.name;
+                                  }
+                                })}
+                              </div>
+                            </div>
+
+                            <div className={style.Price}> € {elem.price}</div>
+                          </div>
+                          <div
+                            style={{
+                              display: "flex",
+                              flexDirection: "row",
+                              width: "100%",
+                              justifyContent: "end",
+                              alignItems: "flex-end",
+                            }}
+                          >
+                            <div onClick={() => handleDelete(elem.id)}>
+                              <img className={style.heart} src={fbh} />
+                            </div>
+                            <div
+                              onClick={() => handleAddtoBasket(elem, elem.id)}
+                            >
+                              <img className={style.basket} src={basketImg} />
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </>
+              ) : (
+                <div
+                  style={{
+                    postition: "relative",
+                    marginLeft: "auto",
+                    marginRight: "auto",
+                    marginTop: "20%",
+                    width: "328px",
+                  }}
+                >
+                  <div>
+                    <H1regular
+                      text={
+                        "The section is empty, look at something in our catalog"
+                      }
+                      align={"left"}
                     />
-                    <div
-                      style={{
-                        width: "inherit",
-                        paddingLeft: "5px",
-                        justifyContent: "space-between",
-                        display: "flex",
-                        flexDirection: "column",
-                      }}
+                  </div>
+                  <div onClick={() => setModalOpen(false)}>
+                    <Link
+                      style={{ color: "black", textDecoration: "none" }}
+                      to={SHOP_ROUTE}
                     >
                       <div
                         style={{
-                          width: "100%",
                           display: "flex",
-                          flexDirection: "row",
-                          justifyContent: "space-between",
+                          width: "100%",
+                          justifyContent: "center",
+                          marginTop: "15px",
                         }}
                       >
-                        <div
-                          style={{ display: "flex", flexDirection: "column" }}
-                        >
-                          <div className={style.Name}>{elem.name}</div>
-                          <div className={style.Brand}>
-                            {product.brands.map((el) => {
-                              if (el.id == elem.brandId) {
-                                return el.name;
-                              }
-                            })}
-                          </div>
-                        </div>
-
-                        <div className={style.Price}> € {elem.price}</div>
+                        <YellowButton
+                          height={"42px"}
+                          width={"328px"}
+                          text={"Catalog"}
+                          fontSize={"20px"}
+                          fontColor={"Black"}
+                        />
                       </div>
-                      <div
-                        style={{
-                          display: "flex",
-                          flexDirection: "row",
-                          width: "100%",
-                          justifyContent: "end",
-                          alignItems: "flex-end",
-                        }}
-                      >
-                        <div onClick={() => handleDelete(elem.id)}>
-                          <img className={style.heart} src={fbh} />
-                        </div>
-                        <div onClick={() => handleAddtoBasket(elem, elem.id)}>
-                          <img className={style.basket} src={basketImg} />
-                        </div>
-                      </div>
-                    </div>
+                    </Link>
                   </div>
-                );
-              })}
+                </div>
+              )}
             </div>
           </div>
         </div>
