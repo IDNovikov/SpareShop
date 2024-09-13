@@ -46,8 +46,8 @@ const Product = sequelize.define("product", {
 
 const Post = sequelize.define("post", {
   id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-  tittle: { type: DataTypes.STRING, unique: false, allowNull: false },
-  discription: { type: DataTypes.STRING, allowNull: false },
+  tittle: { type: DataTypes.TEXT, unique: false, allowNull: false },
+  discription: { type: DataTypes.TEXT, allowNull: false },
   img: { type: DataTypes.STRING, allowNull: false },
 });
 

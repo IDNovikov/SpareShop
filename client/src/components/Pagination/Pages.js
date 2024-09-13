@@ -2,12 +2,27 @@ import { observer } from "mobx-react-lite";
 import React, { useContext } from "react";
 import { Context } from "../../index";
 import style from "./Pages.module.css";
+import { useLocation } from "react-router-dom";
 
 const Pages = observer(() => {
-  const { product } = useContext(Context);
-  const pageCount = Math.ceil(product.totalCount / product.limit);
-  const pagesToShow = 5;
-  const currentPage = product.page;
+  const location = useLocation();
+  let pageCount;
+  let pagesToShow;
+  let currentPage;
+  const constext = useContext(Context);
+  let product;
+
+  if (location.pathname == "/post") {
+    product = constext.blog;
+    pageCount = Math.ceil(product.totalCount / product.limit);
+    pagesToShow = 5;
+    currentPage = product.page;
+  } else {
+    product = constext.product;
+    pageCount = Math.ceil(product.totalCount / product.limit);
+    pagesToShow = 5;
+    currentPage = product.page;
+  }
 
   const getPages = () => {
     const pages = [];

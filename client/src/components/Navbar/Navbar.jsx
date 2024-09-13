@@ -23,6 +23,7 @@ import lupa from "../../assets/Lupa.svg";
 import white_arrow from "../../assets/Lolo.svg";
 import black_arrow from "../../assets/Black_arrow.svg";
 import Favorites from "../Favorites/Favorites.jsx";
+import YellowButton from "../UI/yellowButton/yellowButton.jsx";
 
 const NavBar = () => {
   const [isOpen, setOpen] = useState(false);
@@ -89,7 +90,30 @@ const NavBar = () => {
                   bckgrnd={"black"}
                 />
               </div>
+
               <div className={desk.menu}>
+                {user.isAuth && (
+                  <div>
+                    <div onClick={() => navigate(ADMIN_ROUTE)}>
+                      <YellowButton
+                        height={"42px"}
+                        width={"90px"}
+                        text={"Admin page"}
+                        fontSize={"16px"}
+                        fontColor={"Black"}
+                      />
+                    </div>
+                    <div onClick={() => logOut()}>
+                      <YellowButton
+                        height={"42px"}
+                        width={"90px"}
+                        text={"Logout"}
+                        fontSize={"16px"}
+                        fontColor={"Black"}
+                      />
+                    </div>
+                  </div>
+                )}
                 <Favorites />
 
                 <Link to={BASKET_ROUTE} state={{ background: location }}>
