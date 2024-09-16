@@ -3,23 +3,18 @@ import { useParams } from "react-router-dom";
 import { fetchOnePost } from "../../http/postsAPI";
 import H2Medium from "../../components/UI/H2regular";
 import { formatDate } from "../../hooks/formatDate";
+import { formatText } from "../../hooks/formatText";
 import H1Medium from "../../components/UI/H1Medium";
+import styles from "./PostPage.module.css";
+import ItemSlider from "../../components/UI/ItemSlider/ItemSlider";
+import ArrowBack from "../../components/UI/ArrowBack";
+import { useNavigate } from "react-router-dom";
 
 const PostPage = () => {
   const [post, setPost] = useState({ info: [] });
   const [images, setImages] = useState([]);
   const { id } = useParams();
-
-  const formatText = (text, maxLength) => {
-    if (text.startsWith('"') && text.endsWith('"')) {
-      text = text.slice(1, -1);
-    }
-    if (maxLength && text.length > maxLength) {
-      text = text.slice(0, maxLength - 3) + "...";
-    }
-    console.log(text);
-    return text;
-  };
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchOnePost(id).then((data) => {
@@ -32,17 +27,28 @@ const PostPage = () => {
   }, []);
 
   return (
-    <div>
-      <div>
-        {images.map((image) => (
-          <img
-            style={{ gridArea: "img" }}
-            key={images.indexOf(image)}
-            width={150}
-            height={300}
-            src={process.env.REACT_APP_API_URL + image}
-          />
-        ))}
+    <div className={styles.main}>
+      <div className={styles.slider}>
+        {images[0] != "" ? (
+          <>
+            <ItemSlider images={images} />{" "}
+            <div className={styles.arrow} style={{ position: "absolute" }}>
+              <ArrowBack
+                width={"30px"}
+                height={"30px"}
+                func={() => navigate(-1)}
+              />
+            </div>
+          </>
+        ) : (
+          <div className={styles.arrow} style={{ position: "block" }}>
+            <ArrowBack
+              width={"30px"}
+              height={"30px"}
+              func={() => navigate(-1)}
+            />
+          </div>
+        )}
       </div>
       <H2Medium
         align={"left"}
