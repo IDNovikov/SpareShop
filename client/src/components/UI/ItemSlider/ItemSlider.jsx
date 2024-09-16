@@ -3,6 +3,7 @@ import Slider from "react-slick";
 
 const ItemSlider = ({ images }) => {
   const [i, setI] = useState(0);
+  const [activeIndex, setActiveIndex] = useState(0);
   const windowWidth = useRef(window.innerWidth);
   const settings = {
     dots: true,
@@ -11,6 +12,24 @@ const ItemSlider = ({ images }) => {
     slidesToShow: 1,
     slidesToScroll: 1,
     arrows: false,
+    beforeChange: (current, next) => setActiveIndex(next),
+    appendDots: (dots) => (
+      <div style={{ bottom: "5px" }}>
+        <ul style={{ padding: "2px", margin: "2px" }}> {dots} </ul>
+      </div>
+    ),
+    customPaging: (i) => (
+      <div
+        key={i}
+        style={{
+          width: "13px",
+          height: "13px",
+          border: "1px solid #2D2D2D",
+          borderRadius: "50%",
+          backgroundColor: i === activeIndex ? "black" : "white",
+        }}
+      ></div>
+    ),
   };
   console.log(images);
   return (
@@ -30,7 +49,7 @@ const ItemSlider = ({ images }) => {
               style={{
                 width: "100%",
                 height: "100%",
-                objectFit: "cover",
+                objectFit: "contain",
               }}
               src={process.env.REACT_APP_API_URL + images[i]}
               alt={`Slide ${i}`}
@@ -49,10 +68,10 @@ const ItemSlider = ({ images }) => {
               <div key={index}>
                 <img
                   style={{
-                    width: "150px",
-                    height: "150px",
+                    width: "120px",
+                    height: "120px",
                     cursor: "pointer",
-                    objectFit: "cover",
+                    objectFit: "contain",
                   }}
                   src={process.env.REACT_APP_API_URL + image}
                   alt={`Thumbnail ${index}`}

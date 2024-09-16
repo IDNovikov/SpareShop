@@ -39,7 +39,7 @@ const BasketProduct = sequelize.define("basket_product", {
 
 const Product = sequelize.define("product", {
   id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-  name: { type: DataTypes.STRING, unique: true, allowNull: false },
+  name: { type: DataTypes.STRING, allowNull: false },
   price: { type: DataTypes.INTEGER, allowNull: false },
   img: { type: DataTypes.STRING, allowNull: false },
 });
@@ -72,8 +72,8 @@ const Color = sequelize.define("color", {
 
 const ProductInfo = sequelize.define("product_info", {
   id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-  tittle: { type: DataTypes.STRING, allowNull: false },
-  discription: { type: DataTypes.STRING, allowNull: false },
+  tittle: { type: DataTypes.TEXT },
+  discription: { type: DataTypes.TEXT },
 });
 
 const TypeBrand = sequelize.define("type_brand", {

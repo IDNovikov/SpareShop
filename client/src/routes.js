@@ -15,7 +15,7 @@ import Shop from "./pages/Shop/Shop.js";
 import Certificate from "./pages/Certi/Certificate";
 import Blog from "./pages/Blog/Blog.js";
 import Basket from "./components/modals/BasketModal/basketModal.jsx";
-import ProductPage from "./pages/ProductPage";
+import ProductPage from "./pages/ProductPage/ProductPage";
 import Auth from "./pages/Auth.js";
 import PostPage from "./pages/PostPage/PostPage.jsx";
 import Order from "./components/modals/OrderModal/orderModal";
