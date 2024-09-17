@@ -1,5 +1,4 @@
-import React from "react"
-import { Container } from "react-bootstrap";
+import React from "react";
 import CreateBrand from "../components/modals/createBrand";
 import CreateType from "../components/modals/createType";
 import CreateSize from "../components/modals/createSize";
@@ -11,17 +10,17 @@ import ManageBasket from "../components/modals/manageBasket";
 
 const Admin = () => {
   return (
-    <Container className="d-flex flex-column">
-      <CreateType/>
-      <CreateBrand/>
-      <CreateSize/>
-      <CreateColor/>
-      <CreatePost/>
-      <CreateProduct/>
-      <ManageCerti/>
-      <ManageBasket/>
-    </Container >
+    <div style={{ display: "flex", flexDirection: "column", padding: "30px" }}>
+      <CreateType />
+      <CreateBrand />
+      <CreateSize />
+      <CreateColor />
+      <CreatePost />
+      <CreateProduct />
+      <ManageCerti />
+      <ManageBasket />
+    </div>
   );
-}
+};
 
 export default Admin;

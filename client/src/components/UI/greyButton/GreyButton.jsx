@@ -10,7 +10,11 @@ const GreyButton = ({
   img,
   imgHeight,
   imgWidth,
+  bckColor,
 }) => {
+  if (!bckColor) {
+    bckColor = "white";
+  }
   return (
     <button
       className={style.button}
@@ -19,6 +23,7 @@ const GreyButton = ({
         width: width,
         fontSize: fontSize,
         color: fontColor,
+        backgroundColor: bckColor,
       }}
     >
       <img
