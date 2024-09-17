@@ -22,7 +22,12 @@ const GreyButton = ({
       }}
     >
       <img
-        style={{ width: imgWidth, height: imgHeight, gap: "10px" }}
+        style={{
+          width: imgWidth,
+          height: imgHeight,
+          gap: "10px",
+          marginRight: "10px",
+        }}
         src={img}
       />
       {text}

@@ -30,13 +30,13 @@ const Footer = () => {
           <>
             <div className={style.h1}>
               <H1Medium
-                align={"center"}
+                align={"left"}
                 text={"Online shopping with — Spear&Shop"}
               />
             </div>
             <div>
               <H2Medium
-                align={"center"}
+                align={"left"}
                 text={
                   "There are two factors that you have to consider when you are creating SEO for your online business. The first factor is how much people are searching for keywords or topics that are related to your business and the second factor is the quality of the content that you are providing on your site."
                 }

@@ -10,10 +10,14 @@ import H1Medium from "../../components/UI/H1Medium";
 import { formatText } from "../../hooks/formatText";
 import H2Medium from "../../components/UI/H2regular";
 import GreyButton from "../../components/UI/greyButton/GreyButton";
+import redheart from "../../assets/redheart.png";
+import Heart from "../../assets/heart.png";
+import { observer } from "mobx-react-lite";
 
-const ProductPage = () => {
+const ProductPage = observer(() => {
   const { basket } = useContext(Context);
   const { product } = useContext(Context);
+  const { favorites } = useContext(Context);
   const [productData, setProductData] = useState({ info: [] });
   const [images, setImages] = useState([]);
   const { id } = useParams();
@@ -21,7 +25,23 @@ const ProductPage = () => {
   const add = () => {
     basket.addProduct(productData);
   };
+  const addFavor = () => {
+    favorites.addProduct(productData);
+  };
 
+  const isFavorites = (id) => {
+    let isOK = false;
+
+    favorites.favorites.map((elem) => {
+      if (elem.id == id) {
+        return (isOK = true);
+      }
+    });
+    return isOK;
+  };
+  const handleDelete = (id) => {
+    favorites.deleteFavorite(id);
+  };
   useEffect(() => {
     fetchOneProduct(id).then((data) => {
       setProductData(data);
@@ -56,7 +76,7 @@ const ProductPage = () => {
           </div>
         )}
       </div>
-      <div>
+      <div className={styles.about}>
         <H1Medium
           align={"left"}
           text={`${formatText(productData.name)}`}
@@ -103,25 +123,58 @@ const ProductPage = () => {
           />
         </div>
         <div>
-          <GreyButton
-            width={"100%"}
-            height={"42px"}
-            text={"Favorite"}
-            fontSize={"20px"}
-            fontColor={"Black"}
-          />
+          {!isFavorites(productData.id) ? (
+            <div onClick={addFavor}>
+              <GreyButton
+                img={Heart}
+                width={"100%"}
+                height={"42px"}
+                text={"Favorite"}
+                fontSize={"20px"}
+                fontColor={"Black"}
+              />
+            </div>
+          ) : (
+            <div onClick={() => handleDelete(productData.id)}>
+              <GreyButton
+                img={redheart}
+                width={"100%"}
+                height={"42px"}
+                text={"Favorite"}
+                fontSize={"20px"}
+                fontColor={"Black"}
+              />
+            </div>
+          )}
         </div>
 
         <div>
+          <H1Medium
+            align={"left"}
+            text={"About"}
+            size={"28px"}
+            color={"#2D2D2D"}
+          />
           {productData.info.map((inf) => (
             <div key={inf.id}>
-              {inf.tittle}:{inf.discription}
+              <H2Medium
+                align={"left"}
+                text={inf.tittle}
+                size={"20px"}
+                color={"black"}
+              />
+              <H2Medium
+                align={"left"}
+                text={inf.discription}
+                size={"20px"}
+                color={"black"}
+              />
             </div>
           ))}
         </div>
       </div>
     </div>
   );
-};
+});
 
 export default ProductPage;

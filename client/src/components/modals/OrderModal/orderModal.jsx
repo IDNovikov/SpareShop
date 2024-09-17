@@ -209,9 +209,9 @@ const OrderModal = observer((props) => {
                 <img className={styles.back} src={back} />
               </button>
               <div className={styles.modalTittle}>Checkout</div>
-              <div className={styles.modalClose} onClick={() => props.close}>
+              <Link className={styles.modalClose} to={SHOP_ROUTE}>
                 <img src={X} />
-              </div>
+              </Link>
             </div>
             <div className={styles.modal}>
               <div></div>
