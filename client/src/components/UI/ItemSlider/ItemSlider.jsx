@@ -31,7 +31,6 @@ const ItemSlider = ({ images }) => {
       ></div>
     ),
   };
-  console.log(images);
   return (
     <div style={{ marginBottom: "40px" }}>
       {windowWidth.current > 650 ? (
