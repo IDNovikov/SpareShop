@@ -4,7 +4,7 @@ import { Context } from "../../index";
 import style from "./Pages.module.css";
 import { useLocation } from "react-router-dom";
 
-const Pages = observer(() => {
+const Pages = observer(({ place }) => {
   const location = useLocation();
   let pageCount;
   let pagesToShow;
@@ -12,7 +12,7 @@ const Pages = observer(() => {
   const constext = useContext(Context);
   let product;
 
-  if (location.pathname == "/post") {
+  if (location.pathname == "/post" || place === "admin-blog") {
     product = constext.blog;
     pageCount = Math.ceil(product.totalCount / product.limit);
     pagesToShow = 5;

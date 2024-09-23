@@ -10,7 +10,7 @@ const BasketItem = (props) => {
   const { product } = useContext(Context);
   const redirect = (id) => {
     navigate(PRODUCT_ROUTE + "/" + id);
-    props.handleClose();
+    // props.handleClose;
   };
   const set = () => {
     let array;

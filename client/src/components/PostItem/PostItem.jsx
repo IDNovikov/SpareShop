@@ -8,12 +8,16 @@ import { formatText } from "../../hooks/formatText";
 import { formatDate } from "../../hooks/formatDate";
 import { formatDbImg } from "../../hooks/formatDbImg";
 
-const PostItem = ({ post }) => {
+const PostItem = ({ post, postDelete }) => {
   const navigate = useNavigate();
+  let num = 150;
+  if (postDelete) {
+    num = 30;
+  }
 
   return (
     <div
-      className={styles.main}
+      className={`${!postDelete ? styles.main : styles.mainModal}`}
       onClick={() => navigate(POST_ROUTE + "/" + post.id)}
     >
       <H2Medium
@@ -24,7 +28,7 @@ const PostItem = ({ post }) => {
       {post.tittle != "undefined" && (
         <H1Medium
           align={"left"}
-          text={`${formatText(post.tittle, 150)}`}
+          text={`${formatText(post.tittle, num)}`}
           size={"24px"}
           color={"#2D2D2D"}
         />
@@ -34,7 +38,7 @@ const PostItem = ({ post }) => {
         <H2Medium
           align={"left"}
           size={"16px"}
-          text={`${formatText(post.discription, 150)}`}
+          text={`${formatText(post.discription, num)}`}
         />
       )}
 

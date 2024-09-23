@@ -3,6 +3,7 @@ import React, { useContext } from "react";
 import { Context } from "../..";
 import Productitem from "../ProductItem/Productitem";
 import style from "./ProductList.module.css";
+import GreyButton from "../UI/greyButton/GreyButton";
 
 const Productlist = observer((props) => {
   const { product } = useContext(Context);
@@ -14,10 +15,19 @@ const Productlist = observer((props) => {
           <Productitem
             key={product.id}
             propProduct={product}
-            admin={props.prodDelete}
+            productDelete={props.prodDelete}
           />
           {props.prodDelete ? (
-            <button onClick={() => props.prodDelete(product.id)}>Delete</button>
+            <div onClick={() => props.prodDelete(product.id)}>
+              <GreyButton
+                height={"42px"}
+                width={"110px"}
+                text={"Delete"}
+                fontSize={"14px"}
+                fontColor={"Black"}
+                bckColor={"#ec3a3a"}
+              />
+            </div>
           ) : (
             <></>
           )}

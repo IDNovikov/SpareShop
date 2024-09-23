@@ -14,9 +14,9 @@ import { Context } from "../../..";
 import { SHOP_ROUTE } from "../../../utils/consts";
 import { Link } from "react-router-dom";
 import endBsk from "../../../assets/endBasket.png";
+
 const OrderModal = observer((props) => {
   const { basket } = useContext(Context);
-
   const [finishModal, setFinishMadal] = useState(false);
   const [Data, setData] = useState("");
   const [delivery, setDelivery] = useState("");

@@ -2,7 +2,7 @@ import React, { useState, useRef } from "react";
 import { useClickOutside } from "../../../hooks/useClickOutside";
 import "./dropDownMenu.css";
 
-export default function DropDowm({ name, items, src }) {
+export default function DropDown({ name, items, src }) {
   const [isOpen, setOpen] = useState();
   const menuRef = useRef(null);
   const itemRef = useRef(null);

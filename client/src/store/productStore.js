@@ -50,6 +50,8 @@ export default class ProductStore {
 
   //множественное выделение
   setSelectedTypes(type, name) {
+    console.log(this._selectedTypes);
+    console.log(type, name);
     this.setPage(1);
     if (name !== undefined) {
       return (this._selectedTypes = [type]), (this._selectedTypesName = name);

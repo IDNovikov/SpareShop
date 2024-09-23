@@ -7,7 +7,7 @@ import { Context } from "../..";
 import style from "./ProductItem.module.css";
 import redheart from "../../assets/redheart.png";
 
-const Productitem = observer(({ propProduct, admin }) => {
+const Productitem = observer(({ propProduct, productDelete }) => {
   const { favorites } = useContext(Context);
   const { product } = useContext(Context);
   const navigate = useNavigate();
@@ -38,7 +38,7 @@ const Productitem = observer(({ propProduct, admin }) => {
 
   set();
   return (
-    <div className={style.mainItem}>
+    <div className={`${!productDelete ? style.mainItem : style.mainModal}`}>
       <div className={style.inner}>
         {!isFavorites(propProduct.id) ? (
           <img className={style.Heart} src={Heart} onClick={add} />
