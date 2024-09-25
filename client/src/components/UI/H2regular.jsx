@@ -1,6 +1,6 @@
 import React from "react";
 
-const H2Medium = ({ text, align, size, decor, color }) => {
+const H2Medium = ({ text, align, size, decor, color, bckgrndColor }) => {
   if (!size) {
     size = "20px";
   }
@@ -27,6 +27,7 @@ const H2Medium = ({ text, align, size, decor, color }) => {
           textAlign: align,
           color: color,
           textDecoration: decor,
+          backgroundColor: bckgrndColor,
         }}
       >
         {text}

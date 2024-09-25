@@ -57,13 +57,18 @@ const Productitem = observer(({ propProduct, productDelete }) => {
 
         <div>
           <div className={style.Price}> € {propProduct.price}</div>
-          <div className={style.Brand}>
-            {product.brands.map((elem) => {
-              if (elem.id == propProduct.brandId) {
-                return elem.name;
-              }
-            })}
-          </div>
+          {!productDelete ? (
+            <div className={style.Brand}>
+              {product.brands.map((elem) => {
+                if (elem.id == propProduct.brandId) {
+                  return elem.name;
+                }
+              })}
+            </div>
+          ) : (
+            <></>
+          )}
+
           <div className={style.Name}>{propProduct.name}</div>
 
           {/* {!admin ? <button onClick={add}> Add to card</button> : <></>} */}

@@ -107,6 +107,16 @@
   padding: 0 20px;
   overflow-y: auto;
 }
+.strings {
+  border: 1px solid rgb(204, 204, 204);
+  margin: 20px 10px;
+}
+.strings div {
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  margin: 2px 7px;
+}
 @media (min-width: 600px) {
   .bckgrnd {
     position: absolute;
@@ -120,7 +130,7 @@
     position: absolute;
     z-index: 99999999999999999;
     width: 100vw;
-    height: 100vh;
+    height: auto;
     background-color: white;
 
     padding-top: 20px;
@@ -133,6 +143,9 @@
     /* justify-content: space-evenly; */
     padding-bottom: 72px;
     overflow-y: auto;
+  }
+  .strings div {
+    flex-direction: row;
   }
 }
 

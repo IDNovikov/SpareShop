@@ -20,19 +20,17 @@
   flex-direction: column;
   justify-content: start;
   min-width: 162px;
-  min-height: 316px;
   max-width: 150px;
-  max-height: 200px;
   padding: 0px 0px 4px 0px;
   gap: 4px;
   opacity: 0px;
-  height: 100%;
+  height: max-content;
   aspect-ratio: 1/2;
   border: 1px solid #a8a8a8;
 }
 .inner {
   display: flex;
-  height: 100%;
+  height: max-content;
   flex-direction: column;
   justify-content: space-between;
 }
