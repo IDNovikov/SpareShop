@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useRef } from "react";
 import { useState } from "react";
-import { Button, Row, Col } from "react-bootstrap";
-import Modal from "react-bootstrap/Modal";
+
 import { Context } from "../..";
 import { observer } from "mobx-react-lite";
 import { fetchBaskets, deleteBasket } from "../../http/basketAPI";
@@ -13,6 +12,7 @@ import H1Medium from "../UI/H1Medium";
 import H2Medium from "../UI/H2regular";
 
 const ManageBasket = observer(() => {
+  const { product } = useContext(Context);
   const [baskets, setBaskets] = useState([]);
   const [BasketiId, setBasketiId] = useState("");
   const [isModalOpen, setModalOpen] = useState(false);
@@ -32,10 +32,27 @@ const ManageBasket = observer(() => {
   }, [BasketiId]);
 
   const ProductsNames = (id) => {
-    let prodObj = {};
-    JSON.parse(id).map((item) => {
-      console.log(item);
+    let result = JSON.parse(id).reduce((acc, curr) => {
+      const existing = acc.find((item) => item.ind === curr);
+      if (existing) {
+        existing.count += 1;
+      } else {
+        acc.push({ ind: curr, count: 1 });
+      }
+      return acc;
+    }, []);
+
+    const updatedArray = result.map((item) => {
+      const matchedProduct = product.products.find(
+        (product) => product.id == item.ind
+      );
+      if (matchedProduct) {
+        return { name: matchedProduct.name, count: item.count };
+      }
+      return item;
     });
+    console.log(updatedArray);
+    return updatedArray;
   };
 
   useClickOutside(menuRef, () => {
@@ -69,14 +86,18 @@ const ManageBasket = observer(() => {
             <div className={styles.modal}>
               {baskets.map((basket) => (
                 <div className={styles.strings}>
-                  <div onClick={() => ProductsNames(basket.productsId)}>
+                  <div>
                     <H1Medium align={"left"} size={"22px"} text={"Products:"} />
-                    <H2Medium
-                      align={"left"}
-                      bckgrndColor={"#f1f1f1"}
-                      size={"18px"}
-                      text={basket.productsId}
-                    />
+                    {ProductsNames(basket.productsId).map((item) => {
+                      return (
+                        <H2Medium
+                          align={"left"}
+                          bckgrndColor={"#f1f1f1"}
+                          size={"18px"}
+                          text={`X:${item.count} - ${item.name}`}
+                        />
+                      );
+                    })}
                   </div>
 
                   <div>

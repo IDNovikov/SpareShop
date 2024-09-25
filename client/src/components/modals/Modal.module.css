@@ -130,7 +130,7 @@
     position: absolute;
     z-index: 99999999999999999;
     width: 100vw;
-    height: auto;
+    height: 100vh;
     background-color: white;
 
     padding-top: 20px;

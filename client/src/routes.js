@@ -56,10 +56,10 @@ export const publicRoutes = [
     path: PRODUCT_ROUTE + "/:id",
     Component: ProductPage,
   },
-  {
-    path: REGISTRATION_ROUTE,
-    Component: Auth,
-  },
+  // {
+  //   path: REGISTRATION_ROUTE,
+  //   Component: Auth,
+  // },
   {
     path: LOGIN_ROUTE,
     Component: Auth,
