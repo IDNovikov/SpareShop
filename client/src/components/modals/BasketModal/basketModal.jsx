@@ -62,7 +62,7 @@ const BasketModal = observer(() => {
   let Price = () => {
     if (discont != 0) {
       return (
-        <div style={{ display: "flex" }}>
+        <div className={styles.price}>
           <span>
             <H2Medium decor={"line-through"} text={`€ ${sum}`} />
           </span>

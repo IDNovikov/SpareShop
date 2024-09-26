@@ -17,8 +17,9 @@
   justify-content: center;
 }
 .firstLine {
+  position: relative;
   display: grid;
-  grid-template-columns: 33% 33% 33%;
+  grid-template-columns: 33% 35.5% 30%;
   align-items: center;
 }
 
@@ -26,6 +27,7 @@
   padding-left: 10%;
   display: flex;
   justify-content: space-between;
+  width: max-content;
 }
 
 .menu {
@@ -92,7 +94,7 @@ a {
   text-align: center;
   color: white;
 }
-@media (max-width: 750px) {
+@media (max-width: 820px) {
   .tittleText {
     font-size: 70px;
     font-weight: 200;
@@ -181,33 +183,8 @@ a {
     transform: rotate(-90deg);
   }
 }
-
-.adminButton {
-  margin-top: 20px;
-  background-color: #fff000;
-  border-radius: 12px;
-  color: #000;
-  cursor: pointer;
-  font-weight: bold;
-  padding: 10px 15px;
-  text-align: center;
-  transition: 200ms;
-  width: 100%;
-  box-sizing: border-box;
-  border: 0;
-  font-size: 16px;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-}
-.adminButton:not(:disabled):hover,
-.adminButton:not(:disabled):focus {
-  outline: 0;
-  background: #f4e603;
-  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.2), 0 3px 8px 0 rgba(0, 0, 0, 0.15);
-}
-.adminButton:disabled {
-  filter: saturate(0.2) opacity(0.5);
-  -webkit-filter: saturate(0.2) opacity(0.5);
-  cursor: not-allowed;
+.adminMenu {
+  position: absolute;
+  right: 23%;
+  width: 100px;
 }

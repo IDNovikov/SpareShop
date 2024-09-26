@@ -114,7 +114,7 @@ const BrandCourusel = (props) => {
               >
                 <img src={b1} />
               </div>
-              Beeunusual
+              <div style={{ width: "100px" }}> Beeunusual</div>
             </div>
             <div className={style.item}>
               <div
@@ -123,7 +123,7 @@ const BrandCourusel = (props) => {
               >
                 <img src={b2} />
               </div>
-              CarbonioGFT
+              <div style={{ width: "100px" }}> CarbonioGFT</div>
             </div>
             <div className={style.item}>
               <div
@@ -132,7 +132,7 @@ const BrandCourusel = (props) => {
               >
                 <img src={b3} />
               </div>
-              One shot
+              <div style={{ width: "100px" }}> One shot</div>
             </div>
             <div className={style.item}>
               <div
@@ -141,7 +141,7 @@ const BrandCourusel = (props) => {
               >
                 <img src={b4} />
               </div>
-              Mythicon
+              <div style={{ width: "100px" }}> Mythicon </div>
             </div>
             <div className={style.item}>
               <div
@@ -150,7 +150,7 @@ const BrandCourusel = (props) => {
               >
                 <img src={b5} />
               </div>
-              Hydronaut
+              <div style={{ width: "100px" }}> Hydronaut </div>
             </div>
             <div className={style.item}>
               <div
@@ -159,7 +159,7 @@ const BrandCourusel = (props) => {
               >
                 <img src={b6} />
               </div>
-              Polosub
+              <div style={{ width: "100px" }}> Polosub </div>
             </div>
             <div className={style.item}>
               <div
@@ -168,7 +168,7 @@ const BrandCourusel = (props) => {
               >
                 <img src={b7} />
               </div>
-              K.rouk
+              <div style={{ width: "100px" }}> K.rouk </div>
             </div>
           </Slider>
         </div>

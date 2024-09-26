@@ -196,7 +196,7 @@
   color: #636363;
   width: calc(100% - 40px);
 }
-.search:hover {
+.search:focus {
   border: 2px solid #fff500;
 }
 .textForm {

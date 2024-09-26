@@ -29,6 +29,10 @@ const ProductPage = observer(() => {
     favorites.addProduct(productData);
   };
 
+  function removeCommas(str) {
+    return str.replace(/^,+|,+$/g, "").trim();
+  }
+
   const isFavorites = (id) => {
     let isOK = false;
 
@@ -51,7 +55,32 @@ const ProductPage = observer(() => {
       setImages(array);
     });
   }, []);
-  console.log(product.brands[0]);
+  const getBrandName = (brands, brandId) => {
+    if (!brands || brands.length === 0 || !brandId) {
+      return ""; // Возвращаем пустую строку, если данные не загружены
+    }
+
+    const brand = brands.find((elem) => elem.id === brandId);
+    return brand ? removeCommas(brand.name) : "";
+  };
+
+  const getColorName = (colors, colorId) => {
+    if (!colors || colors.length === 0 || !colorId) {
+      return ""; // Возвращаем пустую строку, если данные не загружены
+    }
+
+    const color = colors.find((elem) => elem.id === colorId);
+    return color ? removeCommas(color.name) : "";
+  };
+
+  const getSizeName = (sizes, sizeId) => {
+    if (!sizes || sizes.length === 0 || !sizeId) {
+      return ""; // Возвращаем пустую строку, если данные не загружены
+    }
+
+    const size = sizes.find((elem) => elem.id === sizeId);
+    return size ? removeCommas(size.name) : "";
+  };
   return (
     <div className={styles.main}>
       <div className={styles.slider}>
@@ -85,31 +114,19 @@ const ProductPage = observer(() => {
         />
 
         <H2Medium
-          align={"left"}
-          size={"16px"}
-          text={`Brand:${product.brands.map((elem) => {
-            if (elem.id == productData.brandId) {
-              return elem.name;
-            }
-          })}`}
+          align="left"
+          size="16px"
+          text={`Brand: ${getBrandName(product.brands, productData.brandId)}`}
         />
         <H2Medium
-          align={"left"}
-          size={"16px"}
-          text={`Size:${product.sizes.map((elem) => {
-            if (elem.id == productData.sizeId) {
-              return elem.name;
-            }
-          })}`}
+          align="left"
+          size="16px"
+          text={`Color: ${getColorName(product.colors, productData.colorId)}`}
         />
         <H2Medium
-          align={"left"}
-          size={"16px"}
-          text={`Color:${product.colors.map((elem) => {
-            if (elem.id == productData.colorId) {
-              return elem.name;
-            }
-          })}`}
+          align="left"
+          size="16px"
+          text={`Size: ${getSizeName(product.sizes, productData.sizeId)}`}
         />
         <h3>€ {productData.price}.00</h3>
 

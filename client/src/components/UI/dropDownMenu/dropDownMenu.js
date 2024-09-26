@@ -12,7 +12,7 @@ export default function DropDown({ name, items, src }) {
 
   const li = items.map((item) => {
     return (
-      <li className="drop_menu_item" id={item.id}>
+      <li className="drop_menu_item" style={{}} id={item.id}>
         {item.item}
       </li>
     );

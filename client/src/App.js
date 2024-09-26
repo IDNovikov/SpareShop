@@ -1,4 +1,10 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, {
+  useContext,
+  useEffect,
+  useState,
+  useRef,
+  CSSProperties,
+} from "react";
 import { BrowserRouter } from "react-router-dom";
 import AppRouter from "./components/AppRouter";
 import Navbar from "./components/Navbar/Navbar";
@@ -8,13 +14,22 @@ import { check } from "./http/userAPI";
 import { Spinner } from "react-bootstrap";
 import Footer from "./components/Footer/Footer";
 
-//сюда добавить проверку начальной корзины
+import ClipLoader from "react-spinners/ClipLoader";
 
 const App = observer(() => {
   const { user } = useContext(Context);
   const { basket } = useContext(Context);
   const { favorites } = useContext(Context);
   const [loading, setLoading] = useState(true);
+  const secondComponentRef = useRef(null);
+
+  const scrollToSecondComponent = () => {
+    if (secondComponentRef.current) {
+      secondComponentRef.current.scrollIntoView({ behavior: "smooth" });
+    } else {
+      console.error("secondComponentRef is null");
+    }
+  };
 
   useEffect(() => {
     check()
@@ -44,8 +59,8 @@ const App = observer(() => {
 
   return (
     <BrowserRouter>
-      <Navbar />
-      <AppRouter />
+      <Navbar scrollToSecondComponent={scrollToSecondComponent} />
+      <AppRouter ref={secondComponentRef} />
       <Footer />
     </BrowserRouter>
   );

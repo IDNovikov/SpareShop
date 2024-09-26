@@ -13,6 +13,7 @@
   opacity: 0px;
   height: 100%;
   aspect-ratio: 1/2;
+  margin: 0 auto;
 }
 .mainModal {
   position: relative;
@@ -35,6 +36,7 @@
   justify-content: space-between;
 }
 .Heart {
+  cursor: pointer;
   width: 24px;
   height: 24px;
   gap: 10px;
@@ -46,6 +48,7 @@
   padding-bottom: 5px;
   width: 100%;
   height: auto;
+  cursor: pointer;
 }
 
 .Price {
@@ -76,4 +79,6 @@
   line-height: 20px;
   text-align: left;
   color: #2d2d2d;
+  width: 70%;
+  word-wrap: break-word;
 }

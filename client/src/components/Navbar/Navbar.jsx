@@ -25,7 +25,7 @@ import black_arrow from "../../assets/Black_arrow.svg";
 import Favorites from "../Favorites/Favorites.jsx";
 import YellowButton from "../UI/yellowButton/yellowButton.jsx";
 
-const NavBar = () => {
+const NavBar = ({ scrollToSecondComponent, targetRef }) => {
   const [isOpen, setOpen] = useState(false);
   const menuRef = useRef(null);
   const windowWidth = useRef(window.innerWidth);
@@ -35,7 +35,9 @@ const NavBar = () => {
       setOpen(false);
     }
   });
-
+  const handleClose = () => {
+    setOpen(!isOpen);
+  };
   const { user } = useContext(Context);
   const navigate = useNavigate();
   const location = useLocation(-1);
@@ -62,14 +64,13 @@ const NavBar = () => {
     { id: 4, item: "Polosub" },
     { id: 5, item: "Hydronaut" },
     { id: 6, item: "BEENUSUAL" },
-    { id: 7, item: "Ilya Brans" },
-    { id: 8, item: "K.Rouk" },
+    { id: 7, item: "K.Rouk" },
   ];
 
   return (
     <div className={desk.header}>
       <div className={desk.main}>
-        {windowWidth.current > 750 ? (
+        {windowWidth.current > 820 ? (
           <>
             <div className={desk.firstLine}>
               <div className={desk.contacts}>
@@ -93,7 +94,7 @@ const NavBar = () => {
 
               <div className={desk.menu}>
                 {user.isAuth && (
-                  <div>
+                  <div className={desk.adminMenu}>
                     <div onClick={() => navigate(ADMIN_ROUTE)}>
                       <YellowButton
                         height={"42px"}
@@ -136,7 +137,10 @@ const NavBar = () => {
                 <li className={desk.headerNavItem}>
                   <DropDown name={"Brands"} items={brands} src={white_arrow} />
                 </li>
-                <li className={desk.headerNavItem}>
+                <li
+                  className={desk.headerNavItem}
+                  onClick={scrollToSecondComponent}
+                >
                   <Link className={desk.Link} to={SHOP_ROUTE}>
                     Catalog
                   </Link>
@@ -200,19 +204,28 @@ const NavBar = () => {
                 <li className={desk.headerNavItem}>
                   <DropDown name={"Brands"} items={brands} src={black_arrow} />
                 </li>
-                <li className={desk.headerNavItem}>
+                <li
+                  className={desk.headerNavItem}
+                  onClick={() => handleClose()}
+                >
                   <Link className={desk.Link} to={SHOP_ROUTE}>
                     Catalog
                   </Link>
                   <img className={desk.linkArrow} src={black_arrow} />
                 </li>
-                <li className={desk.headerNavItem}>
+                <li
+                  className={desk.headerNavItem}
+                  onClick={() => handleClose()}
+                >
                   <Link className={desk.Link} to={CERTIFICATE_ROUTE}>
                     Gift certificate
                   </Link>
                   <img className={desk.linkArrow} src={black_arrow} />
                 </li>
-                <li className={desk.headerNavItem}>
+                <li
+                  className={desk.headerNavItem}
+                  onClick={() => handleClose()}
+                >
                   <Link className={desk.Link} to={POST_ROUTE}>
                     Blog
                   </Link>

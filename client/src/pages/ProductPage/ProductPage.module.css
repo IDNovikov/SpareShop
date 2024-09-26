@@ -27,6 +27,11 @@
   height: 30px;
   gap: 10px;
 }
+.about {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 500px;
+}
 .about div {
   margin-bottom: 15px;
 }
