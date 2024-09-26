@@ -1,26 +1,19 @@
-import React, {
-  useContext,
-  useEffect,
-  useState,
-  useRef,
-  CSSProperties,
-} from "react";
+import React, { useContext, useEffect, useState, useRef } from "react";
 import { BrowserRouter } from "react-router-dom";
 import AppRouter from "./components/AppRouter";
 import Navbar from "./components/Navbar/Navbar";
 import { observer } from "mobx-react-lite";
 import { Context } from ".";
 import { check } from "./http/userAPI";
-import { Spinner } from "react-bootstrap";
+import { SpinnerCircular } from "spinners-react";
 import Footer from "./components/Footer/Footer";
-
-import ClipLoader from "react-spinners/ClipLoader";
 
 const App = observer(() => {
   const { user } = useContext(Context);
   const { basket } = useContext(Context);
   const { favorites } = useContext(Context);
   const [loading, setLoading] = useState(true);
+  let [color, setColor] = useState("#ffffff");
   const secondComponentRef = useRef(null);
 
   const scrollToSecondComponent = () => {
@@ -54,7 +47,17 @@ const App = observer(() => {
     }
   });
   if (loading) {
-    return <Spinner animation={"grow"} />;
+    return (
+      <div style={{ width: "100vw", height: "100vh", display: "flex" }}>
+        <SpinnerCircular
+          size={200}
+          thickness={150}
+          color={"#e0d900"}
+          secondaryColor={"rgba(0,0,0,0.7)"}
+          style={{ marginLeft: "auto", marginRight: "auto" }}
+        />
+      </div>
+    );
   }
 
   return (

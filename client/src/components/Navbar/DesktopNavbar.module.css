@@ -188,3 +188,6 @@ a {
   right: 23%;
   width: 100px;
 }
+.activeLink {
+  color: #e0d900;
+}

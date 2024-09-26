@@ -86,7 +86,7 @@ const ProductPage = observer(() => {
       <div className={styles.slider}>
         {images[0] != "" ? (
           <>
-            <ItemSlider images={images} />{" "}
+            <ItemSlider images={images} />
             <div className={styles.arrow} style={{ position: "absolute" }}>
               <ArrowBack
                 width={"30px"}

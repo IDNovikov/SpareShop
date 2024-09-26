@@ -115,7 +115,7 @@
   display: flex;
   justify-content: flex-start;
   flex-direction: column;
-  padding: 40px 15px;
+  padding: 40px 0px 40px 20px;
 }
 
 .NavItem {
@@ -165,5 +165,8 @@
     font-size: 70px;
     font-weight: 200;
     line-height: 60px;
+  }
+  .NavList {
+    padding: 40px 20px 40px 20px;
   }
 }

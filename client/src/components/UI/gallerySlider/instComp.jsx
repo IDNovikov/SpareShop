@@ -20,7 +20,10 @@ const InstComp = (props) => {
   const windowWidth = useRef(window.innerWidth);
   let sliderPAdding = "80px";
   let slidesToShow = 1;
-
+  if (windowWidth.current > 359) {
+    sliderPAdding = "60px";
+    slidesToShow = 1;
+  }
   if (windowWidth.current > 450) {
     sliderPAdding = "10px";
     slidesToShow = 2;

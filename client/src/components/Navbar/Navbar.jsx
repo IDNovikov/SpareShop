@@ -9,7 +9,13 @@ import {
   CERTIFICATE_ROUTE,
   BASKET_ROUTE,
 } from "../../utils/consts";
-import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
+import {
+  Link,
+  NavLink,
+  Outlet,
+  useLocation,
+  useNavigate,
+} from "react-router-dom";
 import BasketButton from "../UI/basketButton";
 import desk from "./DesktopNavbar.module.css";
 import CircleButton from "../UI/circleButtom";
@@ -141,19 +147,34 @@ const NavBar = ({ scrollToSecondComponent, targetRef }) => {
                   className={desk.headerNavItem}
                   onClick={scrollToSecondComponent}
                 >
-                  <Link className={desk.Link} to={SHOP_ROUTE}>
+                  <NavLink
+                    className={({ isActive }) =>
+                      isActive ? `${desk.Link} ${desk.activeLink}` : desk.Link
+                    }
+                    to={SHOP_ROUTE}
+                  >
                     Catalog
-                  </Link>
+                  </NavLink>
                 </li>
                 <li className={desk.headerNavItem}>
-                  <Link className={desk.Link} to={CERTIFICATE_ROUTE}>
+                  <NavLink
+                    className={({ isActive }) =>
+                      isActive ? `${desk.Link} ${desk.activeLink}` : desk.Link
+                    }
+                    to={CERTIFICATE_ROUTE}
+                  >
                     Gift certificate
-                  </Link>
+                  </NavLink>
                 </li>
                 <li className={desk.headerNavItem}>
-                  <Link className={desk.Link} to={POST_ROUTE}>
+                  <NavLink
+                    className={({ isActive }) =>
+                      isActive ? `${desk.Link} ${desk.activeLink}` : desk.Link
+                    }
+                    to={POST_ROUTE}
+                  >
                     Blog
-                  </Link>
+                  </NavLink>
                 </li>
               </ul>
             </nav>
@@ -208,27 +229,27 @@ const NavBar = ({ scrollToSecondComponent, targetRef }) => {
                   className={desk.headerNavItem}
                   onClick={() => handleClose()}
                 >
-                  <Link className={desk.Link} to={SHOP_ROUTE}>
+                  <NavLink className={desk.Link} to={SHOP_ROUTE}>
                     Catalog
-                  </Link>
+                  </NavLink>
                   <img className={desk.linkArrow} src={black_arrow} />
                 </li>
                 <li
                   className={desk.headerNavItem}
                   onClick={() => handleClose()}
                 >
-                  <Link className={desk.Link} to={CERTIFICATE_ROUTE}>
+                  <NavLink className={desk.Link} to={CERTIFICATE_ROUTE}>
                     Gift certificate
-                  </Link>
+                  </NavLink>
                   <img className={desk.linkArrow} src={black_arrow} />
                 </li>
                 <li
                   className={desk.headerNavItem}
                   onClick={() => handleClose()}
                 >
-                  <Link className={desk.Link} to={POST_ROUTE}>
+                  <NavLink className={desk.Link} to={POST_ROUTE}>
                     Blog
-                  </Link>
+                  </NavLink>
                   <img className={desk.linkArrow} src={black_arrow} />
                 </li>
                 <div
@@ -271,9 +292,8 @@ const NavBar = ({ scrollToSecondComponent, targetRef }) => {
             </nav>
           </>
         )}
+        <Outlet />
       </div>
-
-      <Outlet />
     </div>
   );
 };
