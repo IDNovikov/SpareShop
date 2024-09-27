@@ -24,7 +24,6 @@ class CerctificateController {
   async getAllCertificate(req, res, next) {
     try {
       const certificates = await Certificate.findAll();
-      console.log(certificates);
       return res.json(certificates);
     } catch (err) {
       next(ApiError.badRequest(err.massage));

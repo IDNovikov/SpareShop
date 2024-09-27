@@ -17,6 +17,7 @@
   line-height: 16px;
   text-align: center;
   color: #ffffff;
+  user-select: none;
 }
 .item {
   /* margin-right: 30px; */

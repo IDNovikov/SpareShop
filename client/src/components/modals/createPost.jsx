@@ -31,7 +31,6 @@ const CreatePost = observer(() => {
     formData.append("img5", file5);
     formData.append("tittle", JSON.stringify(tittle));
     formData.append("discription", JSON.stringify(discription));
-    console.log(formData);
     createPost(formData).then((data) => setTitle(""), setDiscription(""));
   };
 
@@ -55,11 +54,25 @@ const CreatePost = observer(() => {
   };
 
   useEffect(() => {
+    if (isModalOpen) {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+      setTimeout(() => {
+        document.body.classList.add(styles.noScroll);
+      }, 500);
+    } else {
+      document.body.classList.remove(styles.noScroll);
+    }
     fetchPosts(blog.page, 5).then((data) => {
       blog.setPosts(data.rows);
       blog.setTotalCount(data.count);
     });
-  }, [blog.page, del, tittle]);
+    return () => {
+      document.body.classList.remove(styles.noScroll);
+    };
+  }, [blog.page, del, tittle, isModalOpen]);
   return (
     <>
       <div onClick={() => setModalOpen(!isModalOpen)}>

@@ -25,10 +25,24 @@ const ManageCerti = observer(() => {
   };
 
   useEffect(() => {
+    if (isModalOpen) {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+      setTimeout(() => {
+        document.body.classList.add(styles.noScroll);
+      }, 500);
+    } else {
+      document.body.classList.remove(styles.noScroll);
+    }
     fetchCertificates().then((data) => {
       setCerties(data);
     });
-  }, [CertiId]);
+    return () => {
+      document.body.classList.remove(styles.noScroll);
+    };
+  }, [CertiId, isModalOpen]);
 
   useClickOutside(menuRef, () => {
     if (isModalOpen) {

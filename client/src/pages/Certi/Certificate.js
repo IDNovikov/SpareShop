@@ -56,9 +56,8 @@ const Certificate = () => {
     formData.append("note", note);
     formData.append("emailTo", emailTo);
     formData.append("phone", phone);
-    console.log(formData);
+
     createCertificate(formData).then((data) => {
-      console.log(formData);
       setModal(true);
     });
   };

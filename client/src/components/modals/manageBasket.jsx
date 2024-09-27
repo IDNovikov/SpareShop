@@ -26,10 +26,24 @@ const ManageBasket = observer(() => {
   };
 
   useEffect(() => {
+    if (isModalOpen) {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+      setTimeout(() => {
+        document.body.classList.add(styles.noScroll);
+      }, 500);
+    } else {
+      document.body.classList.remove(styles.noScroll);
+    }
     fetchBaskets().then((data) => {
       setBaskets(data);
     });
-  }, [BasketiId]);
+    return () => {
+      document.body.classList.remove(styles.noScroll);
+    };
+  }, [BasketiId, isModalOpen]);
 
   const ProductsNames = (id) => {
     let result = JSON.parse(id).reduce((acc, curr) => {
@@ -51,7 +65,6 @@ const ManageBasket = observer(() => {
       }
       return item;
     });
-    console.log(updatedArray);
     return updatedArray;
   };
 

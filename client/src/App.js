@@ -28,7 +28,6 @@ const App = observer(() => {
     check()
       .then((data) => {
         if (data) {
-          console.log(data);
           user.setUser(true);
           user.setIsAuth(true);
         }

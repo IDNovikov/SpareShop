@@ -37,8 +37,6 @@ const BasketModal = observer(() => {
     } else {
       return setCertiValid(true), setCerti("");
     }
-
-    console.log(isCertyValid);
   };
 
   const addToBasket = (product) => {

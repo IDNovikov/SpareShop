@@ -10,4 +10,5 @@
 .main {
   height: 300px;
   background-color: black;
+  user-select: none;
 }

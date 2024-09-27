@@ -101,6 +101,17 @@ const CreateProduct = observer(() => {
   };
 
   useEffect(() => {
+    if (isModalOpen) {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+      setTimeout(() => {
+        document.body.classList.add(styles.noScroll);
+      }, 500);
+    } else {
+      document.body.classList.remove(styles.noScroll);
+    }
     fetchProducts(
       product.selectedBrands,
       product.selectedTypes,
@@ -114,6 +125,9 @@ const CreateProduct = observer(() => {
       product.setProducts(data.rows);
       product.setTotalCount(data.count);
     });
+    return () => {
+      document.body.classList.remove(styles.noScroll);
+    };
   }, [
     product.page,
     product.selectedTypes,
@@ -124,6 +138,7 @@ const CreateProduct = observer(() => {
     product.selectedSearch,
     del,
     name,
+    isModalOpen,
   ]);
 
   return (

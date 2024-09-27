@@ -5,7 +5,7 @@
   display: flex;
   flex-direction: column;
   width: 100wh;
-  height: 272px;
+  height: auto;
   gap: 0px;
   opacity: 0px;
   background-color: black;
@@ -42,6 +42,7 @@
 }
 .menuNav {
   height: 100%;
+  padding: 0 0 30px 0;
 }
 .menuNavActive {
   height: 100%;
@@ -107,7 +108,7 @@ a {
     justify-content: space-between;
   }
   .main {
-    height: 96px;
+    height: auto;
     overflow-x: hidden;
   }
   .header_inform {
@@ -190,4 +191,30 @@ a {
 }
 .activeLink {
   color: #e0d900;
+}
+.wallpaper {
+  width: auto;
+  height: 50vw;
+  min-height: 300px;
+  gap: 0px;
+  opacity: 0px;
+  background-position: center;
+  background-image: url(../../assets/image3.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.tittleText {
+  gap: 8px;
+  opacity: 0px;
+  font-size: 123px;
+  font-weight: 400;
+  line-height: 90.61px;
+  font-family: "Covered By Your Grace";
+  text-align: center;
+  color: white;
 }

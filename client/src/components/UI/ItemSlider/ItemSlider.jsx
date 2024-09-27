@@ -31,7 +31,6 @@ const ItemSlider = ({ images }) => {
       ></div>
     ),
   };
-  console.log(images[1]);
   return (
     <div style={{ marginBottom: "40px" }}>
       {images[1] != undefined ? (

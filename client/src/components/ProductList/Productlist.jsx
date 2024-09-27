@@ -8,7 +8,6 @@ import H1Medium from "../UI/H1Medium";
 
 const Productlist = observer((props) => {
   const { product } = useContext(Context);
-  console.log(product.products[0]);
   return (
     <div className={style.productGrid}>
       {product.products[0] != undefined ? (

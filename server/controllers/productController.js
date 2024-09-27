@@ -12,8 +12,6 @@ class ProductController {
       let price = Number(req.body.price);
       let brandId = Number(req.body.brandId);
       let typeId = Number(req.body.typeId);
-      console.log(price);
-      console.log(req.body);
       const images = req.files;
       const data = [];
 
@@ -67,7 +65,6 @@ class ProductController {
         page = 1,
         limit = 10,
       } = req.query;
-      console.log(search);
       page = page - 1;
       limit = parseInt(limit, 10);
       let offset = page * limit;

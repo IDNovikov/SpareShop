@@ -31,11 +31,14 @@ import black_arrow from "../../assets/Black_arrow.svg";
 import Favorites from "../Favorites/Favorites.jsx";
 import YellowButton from "../UI/yellowButton/yellowButton.jsx";
 
-const NavBar = ({ scrollToSecondComponent, targetRef }) => {
+const NavBar = () => {
   const [isOpen, setOpen] = useState(false);
   const menuRef = useRef(null);
   const windowWidth = useRef(window.innerWidth);
-
+  const { user } = useContext(Context);
+  const navigate = useNavigate();
+  const location = useLocation(-1);
+  const { product } = useContext(Context);
   useClickOutside(menuRef, () => {
     if (isOpen) {
       setOpen(false);
@@ -44,9 +47,6 @@ const NavBar = ({ scrollToSecondComponent, targetRef }) => {
   const handleClose = () => {
     setOpen(!isOpen);
   };
-  const { user } = useContext(Context);
-  const navigate = useNavigate();
-  const location = useLocation(-1);
 
   const logOut = () => {
     user.setUser({});
@@ -72,7 +72,6 @@ const NavBar = ({ scrollToSecondComponent, targetRef }) => {
     { id: 6, item: "BEENUSUAL" },
     { id: 7, item: "K.Rouk" },
   ];
-
   return (
     <div className={desk.header}>
       <div className={desk.main}>
@@ -138,20 +137,27 @@ const NavBar = ({ scrollToSecondComponent, targetRef }) => {
                     name={"Products"}
                     items={products}
                     src={white_arrow}
+                    handleClose={handleClose}
+                    route={`${SHOP_ROUTE}#shop`}
+                    array={product.types}
                   />
                 </li>
                 <li className={desk.headerNavItem}>
-                  <DropDown name={"Brands"} items={brands} src={white_arrow} />
+                  <DropDown
+                    name={"Brands"}
+                    items={brands}
+                    src={white_arrow}
+                    handleClose={handleClose}
+                    route={`${SHOP_ROUTE}#shop`}
+                    array={product.brands}
+                  />
                 </li>
-                <li
-                  className={desk.headerNavItem}
-                  onClick={scrollToSecondComponent}
-                >
+                <li className={desk.headerNavItem}>
                   <NavLink
                     className={({ isActive }) =>
                       isActive ? `${desk.Link} ${desk.activeLink}` : desk.Link
                     }
-                    to={SHOP_ROUTE}
+                    to={`${SHOP_ROUTE}#shop`}
                   >
                     Catalog
                   </NavLink>
@@ -178,6 +184,19 @@ const NavBar = ({ scrollToSecondComponent, targetRef }) => {
                 </li>
               </ul>
             </nav>
+            <div className={desk.wallpaper}>
+              <div className={desk.tittleText}>
+                Spearfishing <p>Store</p>
+              </div>
+
+              <YellowButton
+                height={"52px"}
+                width={"250px"}
+                text={"Shop now"}
+                fontSize={"20px"}
+                fontColor={"Black"}
+              />
+            </div>
           </>
         ) : (
           <>
@@ -220,16 +239,26 @@ const NavBar = ({ scrollToSecondComponent, targetRef }) => {
                     name={"Products"}
                     items={products}
                     src={black_arrow}
+                    handleClose={handleClose}
+                    route={`${SHOP_ROUTE}#shop`}
+                    array={product.types}
                   />
                 </li>
                 <li className={desk.headerNavItem}>
-                  <DropDown name={"Brands"} items={brands} src={black_arrow} />
+                  <DropDown
+                    name={"Brands"}
+                    items={brands}
+                    src={black_arrow}
+                    handleClose={handleClose}
+                    route={`${SHOP_ROUTE}#shop`}
+                    array={product.brands}
+                  />
                 </li>
                 <li
                   className={desk.headerNavItem}
                   onClick={() => handleClose()}
                 >
-                  <NavLink className={desk.Link} to={SHOP_ROUTE}>
+                  <NavLink className={desk.Link} to={`${SHOP_ROUTE}#shop`}>
                     Catalog
                   </NavLink>
                   <img className={desk.linkArrow} src={black_arrow} />
@@ -290,6 +319,22 @@ const NavBar = ({ scrollToSecondComponent, targetRef }) => {
                 </div>
               </ul>
             </nav>
+            {location.pathname == "/" && (
+              <div className={desk.wallpaper}>
+                <div className={desk.tittleText}>
+                  Spearfishing <p>Store</p>
+                </div>
+                <NavLink className={desk.Link} to={`${SHOP_ROUTE}#shop`}>
+                  <YellowButton
+                    height={"52px"}
+                    width={"250px"}
+                    text={"Shop now"}
+                    fontSize={"20px"}
+                    fontColor={"Black"}
+                  />
+                </NavLink>
+              </div>
+            )}
           </>
         )}
         <Outlet />

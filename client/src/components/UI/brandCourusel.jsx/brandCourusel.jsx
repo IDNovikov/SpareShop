@@ -20,11 +20,7 @@ const BrandCourusel = (props) => {
     centerPadding: "60px",
     slidesToShow: 3,
     swipeToSlide: true,
-    afterChange: function (index) {
-      console.log(
-        `Slider Changed to: ${index + 1}, background: #222; color: #bada55`
-      );
-    },
+    afterChange: function (index) {},
   };
 
   const menuRef = useRef(null);

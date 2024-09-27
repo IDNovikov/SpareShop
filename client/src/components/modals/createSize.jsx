@@ -16,8 +16,22 @@ const CreateSize = observer(() => {
   const [value, setValue] = useState();
   const [name, setName] = useState();
   useEffect(() => {
+    if (isModalOpen) {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+      setTimeout(() => {
+        document.body.classList.add(styles.noScroll);
+      }, 500);
+    } else {
+      document.body.classList.remove(styles.noScroll);
+    }
     fetchSizes().then((data) => product.setSizes(data));
-  }, [value, item]);
+    return () => {
+      document.body.classList.remove(styles.noScroll);
+    };
+  }, [value, item, isModalOpen]);
 
   const del = () => {
     let outData = JSON.stringify(item.id);

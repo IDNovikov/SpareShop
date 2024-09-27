@@ -7,9 +7,7 @@ import { useClickOutside } from "../../hooks/useClickOutside";
 import styles from "./Modal.module.css";
 import back from "../../assets/Back.svg";
 
-
 const CreateType = observer(() => {
-
   const { product } = useContext(Context);
   const menuRef = useRef(null);
   const [isModalOpen, setModalOpen] = useState(false);
@@ -18,8 +16,22 @@ const CreateType = observer(() => {
   const [value, setValue] = useState();
   const [name, setName] = useState();
   useEffect(() => {
+    if (isModalOpen) {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+      setTimeout(() => {
+        document.body.classList.add(styles.noScroll);
+      }, 500);
+    } else {
+      document.body.classList.remove(styles.noScroll);
+    }
     fetchTypes().then((data) => product.setTypes(data));
-  }, [value, item]);
+    return () => {
+      document.body.classList.remove(styles.noScroll);
+    };
+  }, [value, item, isModalOpen]);
 
   const del = () => {
     let outData = JSON.stringify(item.id);

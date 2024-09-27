@@ -1,4 +1,4 @@
-import React, { useState, useRef, useContext } from "react";
+import React, { useState, useRef, useContext, useEffect } from "react";
 import { observer } from "mobx-react-lite";
 import { Context } from "../..";
 import styles from "./Bar.module.css";
@@ -9,6 +9,31 @@ const TypeBar = observer(() => {
   const [isOpen, setOpen] = useState(true);
   const menuRef = useRef(null);
 
+  const Ul = () => {
+    return (
+      <ul
+        className={`${
+          isOpen ? styles.dropMenuList : styles.dropMenuListDropped
+        }`}
+      >
+        {product.types.map((type) => (
+          <li className={styles.dropMenuItem} id={type.id}>
+            <input
+              className={styles.checkbox}
+              type="checkbox"
+              active={type.id === product.selectedTypes.id}
+              onClick={() => product.setSelectedTypes(type.id)}
+              key={type.id}
+            />
+            {type.name}
+          </li>
+        ))}
+      </ul>
+    );
+  };
+  useEffect(() => {
+    Ul();
+  }, [product]);
   return (
     <li className={styles.dropMenu} ref={menuRef}>
       <div
@@ -25,24 +50,7 @@ const TypeBar = observer(() => {
           className={`${isOpen ? styles.arrow : styles.rewerse}`}
         />
       </div>
-      <ul
-        className={`${
-          isOpen ? styles.dropMenuList : styles.dropMenuListDropped
-        }`}
-      >
-        {product.types.map((type) => (
-          <li className={styles.dropMenuItem} id={type.id}>
-            <input
-              className={styles.checkbox}
-              type="checkbox"
-              active={type.id === product.selectedTypes.id}
-              onClick={() => product.setSelectedTypes(type.id)}
-              key={type.id}
-            />{" "}
-            {type.name}{" "}
-          </li>
-        ))}
-      </ul>
+      <Ul />
     </li>
   );
 });

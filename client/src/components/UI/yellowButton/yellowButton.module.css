@@ -14,6 +14,7 @@
   line-height: 24px;
   text-align: center;
   border: 2px solid black;
+  user-select: none;
 }
 
 .button:hover {
